@@ -14,4 +14,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler{
         RestErrorMessage threatResponse = new RestErrorMessage(HttpStatus.NOT_FOUND, ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(threatResponse);
     }
+
+    @ExceptionHandler(ItemAlreadyRegisteredException.class)
+    public ResponseEntity<RestErrorMessage> handleItemAlreadyRegisteredException(ItemAlreadyRegisteredException ex) {
+        RestErrorMessage threatResponse = new RestErrorMessage(HttpStatus.FOUND, ex.getMessage());
+        return ResponseEntity.status(HttpStatus.FOUND).body(threatResponse);
+    }
 }

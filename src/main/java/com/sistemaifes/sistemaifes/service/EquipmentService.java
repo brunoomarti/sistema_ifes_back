@@ -9,11 +9,12 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-import com.sistemaifes.sistemaifes.Equipment.EquipmentRepository;
-import com.sistemaifes.sistemaifes.Equipment.EquipmentRequestDTO;
-import com.sistemaifes.sistemaifes.Equipment.EquipmentResponseDTO;
+import com.sistemaifes.sistemaifes.dto.EquipmentRequestDTO;
+import com.sistemaifes.sistemaifes.dto.EquipmentResponseDTO;
+import com.sistemaifes.sistemaifes.exception.ItemAlreadyRegisteredException;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
 import com.sistemaifes.sistemaifes.model.Equipment;
+import com.sistemaifes.sistemaifes.repository.EquipmentRepository;
 
 @Service
 public class EquipmentService {
@@ -33,7 +34,16 @@ public class EquipmentService {
 
     public Equipment saveEquipment(EquipmentRequestDTO data){
         Equipment eqData = new Equipment(data);
+        
+        if (verifyIfEquipmentExist(data.name())){
+            throw new ItemAlreadyRegisteredException(data.name());
+        }
+
         return repository.save(eqData);
+    }
+
+    public boolean verifyIfEquipmentExist(String equipmentName) {
+        return repository.existsByNameIgnoreCase(equipmentName);
     }
 
     public Equipment update(@NotNull @Positive Long id, @Valid Equipment equipment){
@@ -47,5 +57,9 @@ public class EquipmentService {
     public void delete(@PathVariable @NotNull Long id){
         repository.delete(repository.findById(id)
             .orElseThrow(() -> new RecordNotFoundException(id)));
+    }
+
+    public List<Equipment> findEquipmentByName(String name) {
+        return repository.findByNameContainingIgnoreCase(name);
     }
 }

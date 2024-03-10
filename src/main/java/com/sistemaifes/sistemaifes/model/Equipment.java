@@ -1,6 +1,6 @@
 package com.sistemaifes.sistemaifes.model;
  
-import com.sistemaifes.sistemaifes.Equipment.EquipmentRequestDTO;
+import com.sistemaifes.sistemaifes.dto.EquipmentRequestDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sistemaifes.sistemaifes.Equipment.EquipmentRequestDTO;
-import com.sistemaifes.sistemaifes.Equipment.EquipmentResponseDTO;
+import com.sistemaifes.sistemaifes.dto.EquipmentRequestDTO;
+import com.sistemaifes.sistemaifes.dto.EquipmentResponseDTO;
 import com.sistemaifes.sistemaifes.model.Equipment;
 import com.sistemaifes.sistemaifes.service.EquipmentService;
 
@@ -47,9 +47,14 @@ public class EquipmentController {
         return equipmentService.findById(id);
     }
 
+    @GetMapping("/findName/{name}")
+    public List<Equipment> findEquipmentByName(@PathVariable @NotNull String name){
+        return equipmentService.findEquipmentByName(name);
+    }
+
     @PutMapping("/edit/{id}")
     public Equipment update(@PathVariable @NotNull @Positive Long id, @RequestBody Equipment equipment){
-        return equipmentService.update(id , equipment);
+        return equipmentService.update(id, equipment);
     }
 
     @DeleteMapping("/{id}")

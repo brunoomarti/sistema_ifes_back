@@ -1,4 +1,4 @@
-package com.sistemaifes.sistemaifes.Equipment;
+package com.sistemaifes.sistemaifes.dto;
 
 public record EquipmentRequestDTO(String name) {
 }
