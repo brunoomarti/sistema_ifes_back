@@ -35,7 +35,7 @@ public class EquipmentController {
     public @ResponseBody List<EquipmentResponseDTO> getAll(){
         return equipmentService.getAll();
     }
- 
+    
     @PostMapping("/new")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Equipment saveEquipment(@RequestBody EquipmentRequestDTO data){
