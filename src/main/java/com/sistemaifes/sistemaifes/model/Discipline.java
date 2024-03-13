@@ -1,5 +1,6 @@
 package com.sistemaifes.sistemaifes.model;
 
+import com.sistemaifes.sistemaifes.dto.request.DisciplineRequestDTO;
 import com.sistemaifes.sistemaifes.dto.request.StudentRequestDTO;
 
 import jakarta.persistence.Column;
@@ -14,36 +15,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "student")
+@Table(name = "discipline")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class Discipline {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long _id;
 
-    @Column(length = 100, nullable = false)
-    private String name;
-
     @Column(nullable = false)
-    private String studentCode;
-
-    @Column 
-    private double performanceCoefficient;
-
-    @Column 
-    private boolean situation;
+    private String name;
     
-    @Column
-    private Integer period;
-    
-    public Student(StudentRequestDTO data) {
+    public Discipline(DisciplineRequestDTO data) {
         this.name = data.name();
-        this.studentCode = data.studentCode();
-        this.performanceCoefficient = data.performanceCoefficient();
-        this.situation = data.situation();
-        this.period = data.period();
     }
 }
