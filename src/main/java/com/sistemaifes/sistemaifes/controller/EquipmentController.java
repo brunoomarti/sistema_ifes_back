@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sistemaifes.sistemaifes.dto.EquipmentRequestDTO;
-import com.sistemaifes.sistemaifes.dto.EquipmentResponseDTO;
+import com.sistemaifes.sistemaifes.dto.request.EquipmentRequestDTO;
+import com.sistemaifes.sistemaifes.dto.response.EquipmentResponseDTO;
 import com.sistemaifes.sistemaifes.model.Equipment;
 import com.sistemaifes.sistemaifes.service.EquipmentService;
 

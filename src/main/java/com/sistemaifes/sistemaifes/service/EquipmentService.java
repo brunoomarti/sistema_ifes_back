@@ -9,8 +9,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-import com.sistemaifes.sistemaifes.dto.EquipmentRequestDTO;
-import com.sistemaifes.sistemaifes.dto.EquipmentResponseDTO;
+import com.sistemaifes.sistemaifes.dto.request.EquipmentRequestDTO;
+import com.sistemaifes.sistemaifes.dto.response.EquipmentResponseDTO;
 import com.sistemaifes.sistemaifes.exception.ItemAlreadyRegisteredException;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
 import com.sistemaifes.sistemaifes.model.Equipment;

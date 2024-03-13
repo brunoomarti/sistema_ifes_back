@@ -1,4 +1,4 @@
-package com.sistemaifes.sistemaifes.dto;
+package com.sistemaifes.sistemaifes.dto.response;
 
 import com.sistemaifes.sistemaifes.model.Equipment;
 
