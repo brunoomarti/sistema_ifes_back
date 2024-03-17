@@ -29,21 +29,9 @@ public class Student {
 
     @Column(nullable = false)
     private String studentCode;
-
-    @Column 
-    private double performanceCoefficient;
-
-    @Column 
-    private boolean situation;
-    
-    @Column
-    private Integer period;
     
     public Student(StudentRequestDTO data) {
         this.name = data.name();
         this.studentCode = data.studentCode();
-        this.performanceCoefficient = data.performanceCoefficient();
-        this.situation = data.situation();
-        this.period = data.period();
     }
 }

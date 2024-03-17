@@ -15,12 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sistemaifes.sistemaifes.dto.request.DisciplineRequestDTO;
-import com.sistemaifes.sistemaifes.dto.request.EquipmentRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.DisciplineResponseDTO;
-import com.sistemaifes.sistemaifes.dto.response.EquipmentResponseDTO;
 import com.sistemaifes.sistemaifes.model.Discipline;
-import com.sistemaifes.sistemaifes.model.Equipment;
-import com.sistemaifes.sistemaifes.repository.DisciplineRepository;
 import com.sistemaifes.sistemaifes.service.DisciplineService;
 
 import jakarta.validation.constraints.NotNull;

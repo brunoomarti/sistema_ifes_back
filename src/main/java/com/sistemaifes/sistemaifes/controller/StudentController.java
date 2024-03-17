@@ -39,6 +39,7 @@ public class StudentController {
     @PostMapping("/new")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Student saveStudent(@RequestBody StudentRequestDTO data){
+        System.out.println("\n\n\n" + data + "\n\n\n");
         return studentService.saveStudent(data);
     }
 

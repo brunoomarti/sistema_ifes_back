@@ -41,9 +41,6 @@ public class StudentService {
                 .map(recordFound -> {
                     recordFound.setName(student.getName());
                     recordFound.setStudentCode(student.getStudentCode());
-                    recordFound.setPerformanceCoefficient(student.getPerformanceCoefficient());
-                    recordFound.setSituation(student.isSituation());
-                    recordFound.setPeriod(student.getPeriod());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
