@@ -1,14 +1,15 @@
 package com.sistemaifes.sistemaifes.model;
 
+import java.util.List;
 
 import com.sistemaifes.sistemaifes.dto.request.CoordinatorRequestDTO;
-import com.sistemaifes.sistemaifes.dto.request.DisciplineRequestDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,6 +32,9 @@ public class Coordinator {
 
     @Column(nullable = false)
     private String shift;
+
+    @OneToMany(mappedBy = "coordinator")
+    private List<Coordination> coordinators;
 
     public Coordinator(CoordinatorRequestDTO data) {
         this.name = data.name();

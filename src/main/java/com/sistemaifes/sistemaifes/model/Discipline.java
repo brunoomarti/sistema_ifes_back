@@ -1,7 +1,6 @@
 package com.sistemaifes.sistemaifes.model;
 
 import com.sistemaifes.sistemaifes.dto.request.DisciplineRequestDTO;
-import com.sistemaifes.sistemaifes.dto.request.StudentRequestDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

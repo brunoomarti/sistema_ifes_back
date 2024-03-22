@@ -6,12 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.sistemaifes.sistemaifes.dto.request.CoordinatorRequestDTO;
-import com.sistemaifes.sistemaifes.dto.request.EquipmentRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.CoordinatorResponseDTO;
 import com.sistemaifes.sistemaifes.exception.ItemAlreadyRegisteredException;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
 import com.sistemaifes.sistemaifes.model.Coordinator;
-import com.sistemaifes.sistemaifes.model.Equipment;
 import com.sistemaifes.sistemaifes.repository.CoordinatorRepository;
 
 import jakarta.validation.Valid;
