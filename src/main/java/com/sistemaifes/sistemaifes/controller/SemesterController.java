@@ -13,48 +13,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.sistemaifes.sistemaifes.dto.request.ScheduleRequestDTO;
-import com.sistemaifes.sistemaifes.dto.response.ScheduleResponseDTO;
-import com.sistemaifes.sistemaifes.model.Schedule;
-import com.sistemaifes.sistemaifes.service.ScheduleService;
+ 
+import com.sistemaifes.sistemaifes.dto.request.SemesterRequestDTO; 
+import com.sistemaifes.sistemaifes.dto.response.SemesterResponseDTO; 
+import com.sistemaifes.sistemaifes.model.Semester; 
+import com.sistemaifes.sistemaifes.service.SemesterService;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @RestController
-@RequestMapping("api/schedule")
-public class ScheduleController {
-    private final ScheduleService scheduleService;
+@RequestMapping("api/semester")
+public class SemesterController {
+        private final SemesterService semesterService;
 
-    public ScheduleController(ScheduleService scheduleService) {
-        this.scheduleService = scheduleService;
+    public SemesterController(SemesterService semesterService) {
+        this.semesterService = semesterService;
     }
 
     @GetMapping
-    public @ResponseBody List<ScheduleResponseDTO> getAll(){
-        return scheduleService.getAll();
+    public @ResponseBody List<SemesterResponseDTO> getAll(){
+        return semesterService.getAll();
     }
     
     @PostMapping("/new")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Schedule saveSchedule(@RequestBody ScheduleRequestDTO data){ 
-        return scheduleService.saveSchedule(data);
+    public Semester saveSchedule(@RequestBody SemesterRequestDTO data){ 
+        return semesterService.saveSemester(data);
     }
 
     @GetMapping("/{id}")
-    public Schedule findById(@PathVariable @NotNull @Positive Long id){
-        return scheduleService.findById(id);
+    public Semester findById(@PathVariable @NotNull @Positive Long id){
+        return semesterService.findById(id);
     }
 
     @PutMapping("/edit/{id}")
-    public Schedule update(@PathVariable @NotNull @Positive Long id, @RequestBody Schedule schedule){
-        return scheduleService.update(id, schedule);
+    public Semester update(@PathVariable @NotNull @Positive Long id, @RequestBody Semester semester){
+        return semesterService.update(id, semester);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){
-        scheduleService.delete(id);
+        semesterService.delete(id);
     }
 }

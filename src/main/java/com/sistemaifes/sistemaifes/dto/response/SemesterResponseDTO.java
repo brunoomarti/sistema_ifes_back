@@ -1,14 +1,14 @@
 package com.sistemaifes.sistemaifes.dto.response;
 
-import java.util.Date;
+import java.time.LocalDate; 
 
 import com.sistemaifes.sistemaifes.model.Semester; 
 
 public record SemesterResponseDTO(
     Long _id,
     String semester,
-    Date startDate,
-    Date endDate
+    LocalDate startDate,
+    LocalDate endDate
 ) {
     public SemesterResponseDTO(Semester semester){
         this(

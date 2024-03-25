@@ -1,7 +1,6 @@
 package com.sistemaifes.sistemaifes.model;
 
-import java.util.Date;
-
+import java.time.LocalDate; 
 import com.sistemaifes.sistemaifes.dto.request.SemesterRequestDTO;
 
 import jakarta.persistence.Column;
@@ -30,10 +29,10 @@ public class Semester {
     private String semester;
 
     @Column
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column
-    private Date endDate;
+    private LocalDate endDate;
 
     public Semester(SemesterRequestDTO data){
         this.semester = data.semester();

@@ -1,13 +1,12 @@
 package com.sistemaifes.sistemaifes.dto.response;
 
-import java.util.Date;
-
+import java.time.LocalDate; 
 import com.sistemaifes.sistemaifes.model.Schedule;
 
 public record ScheduleResponseDTO(
     Long _id,
-    Date startTime,
-    Date endTime
+    LocalDate startTime,
+    LocalDate endTime
 ) {
 
     public ScheduleResponseDTO(Schedule schedule){

@@ -1,10 +1,5 @@
 package com.sistemaifes.sistemaifes.service;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+ 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -13,10 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.sistemaifes.sistemaifes.dto.request.ScheduleRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.ScheduleResponseDTO;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
-import com.sistemaifes.sistemaifes.model.Schedule;
-import com.sistemaifes.sistemaifes.model.Schedule;
-import com.sistemaifes.sistemaifes.repository.ScheduleRepository;
-import com.sistemaifes.sistemaifes.repository.ScheduleRepository;
+import com.sistemaifes.sistemaifes.model.Schedule; 
+import com.sistemaifes.sistemaifes.repository.ScheduleRepository; 
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +17,7 @@ import jakarta.validation.constraints.Positive;
 
 @Service
 public class ScheduleService {
-        private final ScheduleRepository repository;
+    private final ScheduleRepository repository;
 
     public ScheduleService(ScheduleRepository repository){
         this.repository = repository;
@@ -39,6 +32,8 @@ public class ScheduleService {
     }
 
     public Schedule saveSchedule(ScheduleRequestDTO data){
+        System.out.println(data.startTime());
+        System.out.println(data.endTime());
         Schedule eqData = new Schedule(data);
         
         
