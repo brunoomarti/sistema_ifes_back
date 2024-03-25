@@ -1,14 +1,12 @@
 package com.sistemaifes.sistemaifes.model;
 
-import com.sistemaifes.sistemaifes.dto.request.CoordinatorRequestDTO;
-
+import com.sistemaifes.sistemaifes.dto.request.CoordinationRequestDTO; 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Id; 
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,19 +27,18 @@ public class Coordination {
     @Column(nullable = false)
     private String name;
 
-    @Column
+    @Column(nullable = false)
     private String acronym; // Sigla
 
-    @Column
+    @Column(nullable = false)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "id_coordinator")
-    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne
     private Coordinator coordinator;
 
-
-    public Coordination(CoordinatorRequestDTO data) {
+    public Coordination(CoordinationRequestDTO data) {
         this.name = data.name();
+        this.acronym = data.acronym();
+        this.description = data.description();
     }
 }

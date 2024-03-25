@@ -14,47 +14,47 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sistemaifes.sistemaifes.dto.request.CoordinationRequestDTO;
-import com.sistemaifes.sistemaifes.dto.response.CoordinationResponseDTO;
-import com.sistemaifes.sistemaifes.model.Coordination;
-import com.sistemaifes.sistemaifes.service.CoordinationService;
+import com.sistemaifes.sistemaifes.dto.request.TeacherRequestDTO;
+import com.sistemaifes.sistemaifes.dto.response.TeacherResponseDTO;
+import com.sistemaifes.sistemaifes.model.Teacher;
+import com.sistemaifes.sistemaifes.service.TeacherService;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @RestController
-@RequestMapping("api/coordination")
-public class CoordinationController {
-    private CoordinationService coordinationService;
+@RequestMapping("api/teacher")
+public class TeacherController {
+    private final TeacherService teacherService;
 
-    public CoordinationController(CoordinationService coordinationService){
-        this.coordinationService = coordinationService;
+    public TeacherController(TeacherService teacherService) {
+        this.teacherService = teacherService;
     }
 
     @GetMapping
-    public @ResponseBody List<CoordinationResponseDTO> getAll(){
-        return coordinationService.getAll();
+    public @ResponseBody List<TeacherResponseDTO> getAll(){
+        return teacherService.getAll();
     }
-
+    
     @PostMapping("/new")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Coordination saveCoordination(@RequestBody CoordinationRequestDTO data){
-        return coordinationService.saveCoordination(data);
+    public Teacher saveStudent(@RequestBody TeacherRequestDTO data){ 
+        return teacherService.saveTeacher(data);
     }
 
     @GetMapping("/{id}")
-    public Coordination findById(@PathVariable @NotNull @Positive Long id){
-        return coordinationService.findById(id);
+    public Teacher findById(@PathVariable @NotNull @Positive Long id){
+        return teacherService.findById(id);
     }
 
     @PutMapping("/edit/{id}")
-    public Coordination update(@PathVariable @NotNull @Positive Long id, @RequestBody Coordination coordination){
-        return coordinationService.update(id, coordination);
+    public Teacher update(@PathVariable @NotNull @Positive Long id, @RequestBody Teacher teacher){
+        return teacherService.update(id, teacher);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){
-        coordinationService.delete(id);
+        teacherService.delete(id);
     }
 }

@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
  
-import com.sistemaifes.sistemaifes.model.Student;
+import com.sistemaifes.sistemaifes.model.Teacher;
 
-public interface StudentRepository extends JpaRepository<Student, Long>  {
+public interface TeacherRepository extends JpaRepository<Teacher, Long>{
     boolean existsByNameIgnoreCase(String name);
     
-    List<Student> findByNameContainingIgnoreCase(String name);
+    List<Teacher> findByNameContainingIgnoreCase(String name);
 }

@@ -14,47 +14,47 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sistemaifes.sistemaifes.dto.request.CoordinationRequestDTO;
-import com.sistemaifes.sistemaifes.dto.response.CoordinationResponseDTO;
-import com.sistemaifes.sistemaifes.model.Coordination;
-import com.sistemaifes.sistemaifes.service.CoordinationService;
+import com.sistemaifes.sistemaifes.dto.request.ScheduleRequestDTO;
+import com.sistemaifes.sistemaifes.dto.response.ScheduleResponseDTO;
+import com.sistemaifes.sistemaifes.model.Schedule;
+import com.sistemaifes.sistemaifes.service.ScheduleService;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @RestController
-@RequestMapping("api/coordination")
-public class CoordinationController {
-    private CoordinationService coordinationService;
+@RequestMapping("api/schedule")
+public class ScheduleController {
+    private final ScheduleService ScheduleService;
 
-    public CoordinationController(CoordinationService coordinationService){
-        this.coordinationService = coordinationService;
+    public ScheduleController(ScheduleService ScheduleService) {
+        this.ScheduleService = ScheduleService;
     }
 
     @GetMapping
-    public @ResponseBody List<CoordinationResponseDTO> getAll(){
-        return coordinationService.getAll();
+    public @ResponseBody List<ScheduleResponseDTO> getAll(){
+        return ScheduleService.getAll();
     }
-
+    
     @PostMapping("/new")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Coordination saveCoordination(@RequestBody CoordinationRequestDTO data){
-        return coordinationService.saveCoordination(data);
+    public Schedule saveSchedule(@RequestBody ScheduleRequestDTO data){ 
+        return ScheduleService.saveSchedule(data);
     }
 
     @GetMapping("/{id}")
-    public Coordination findById(@PathVariable @NotNull @Positive Long id){
-        return coordinationService.findById(id);
+    public Schedule findById(@PathVariable @NotNull @Positive Long id){
+        return ScheduleService.findById(id);
     }
 
     @PutMapping("/edit/{id}")
-    public Coordination update(@PathVariable @NotNull @Positive Long id, @RequestBody Coordination coordination){
-        return coordinationService.update(id, coordination);
+    public Schedule update(@PathVariable @NotNull @Positive Long id, @RequestBody Schedule schedule){
+        return ScheduleService.update(id, schedule);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){
-        coordinationService.delete(id);
+        ScheduleService.delete(id);
     }
 }
