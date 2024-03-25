@@ -1,6 +1,6 @@
 package com.sistemaifes.sistemaifes.model;
 
-import java.time.LocalDate; 
+import java.util.Date; 
 import com.sistemaifes.sistemaifes.dto.request.ScheduleRequestDTO;
 
 import jakarta.persistence.Column;
@@ -26,13 +26,13 @@ public class Schedule {
     private Long _id;
 
     @Column
-    private LocalDate startTime;
+    private Date startTime;
 
     @Column
-    private LocalDate endTime;
+    private Date endTime;
 
     public Schedule(ScheduleRequestDTO data){
         this.startTime = data.startTime();
-        this.startTime = data.endTime();
+        this.endTime = data.endTime();
     }
 }

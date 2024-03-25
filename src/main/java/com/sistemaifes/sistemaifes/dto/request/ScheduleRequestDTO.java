@@ -1,10 +1,10 @@
 package com.sistemaifes.sistemaifes.dto.request;
 
-import java.time.LocalDate; 
+import java.util.Date; 
 
 public record ScheduleRequestDTO(
-    LocalDate startTime,
-    LocalDate endTime
+    Date startTime,
+    Date endTime
 ) {
     
 }

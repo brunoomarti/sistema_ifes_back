@@ -34,6 +34,7 @@ public class ScheduleService {
     public Schedule saveSchedule(ScheduleRequestDTO data){
         System.out.println(data.startTime());
         System.out.println(data.endTime());
+        
         Schedule eqData = new Schedule(data);
         
         
