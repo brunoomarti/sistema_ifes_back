@@ -32,7 +32,7 @@ public class CoordinatorService {
         return repository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public Coordinator saveEquipment(CoordinatorRequestDTO data){
+    public Coordinator saveCoordinator(CoordinatorRequestDTO data){
         Coordinator cordData = new Coordinator(data);
         
         if (verifyIfCoordinatorExist(data.name())){
@@ -50,7 +50,9 @@ public class CoordinatorService {
         return repository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(coordinator.getName());
-                    recordFound.setShift(coordinator.getShift());
+                    recordFound.setLogin(coordinator.getLogin());
+                    recordFound.setName(coordinator.getName()); 
+                    recordFound.setCoordination(coordinator.getCoordination());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }

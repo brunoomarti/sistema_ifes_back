@@ -32,14 +32,17 @@ public class StudentService {
     }
 
     public Student saveStudent(StudentRequestDTO data){
-        Student eqData = new Student(data);
-        return repository.save(eqData);
+        Student dataStudent = new Student(data);
+        dataStudent.setEstahAtivo(true);
+        return repository.save(dataStudent);
     }
     
     public Student update(@NotNull @Positive Long id, @Valid Student student){
         return repository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(student.getName());
+                    recordFound.setLogin(student.getLogin());
+                    recordFound.setPassword(student.getPassword());
                     recordFound.setStudentCode(student.getStudentCode());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));

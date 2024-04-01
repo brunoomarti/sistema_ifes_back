@@ -32,17 +32,20 @@ public class TeacherService {
     }
 
     public Teacher saveTeacher(TeacherRequestDTO data){
-        Teacher eqData = new Teacher(data);
-        return repository.save(eqData);
+        Teacher dataTeacher = new Teacher(data);
+        dataTeacher.setEstahAtivo(true);
+        return repository.save(dataTeacher);
     }
     
     public Teacher update(@NotNull @Positive Long id, @Valid Teacher teacher){
         return repository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(teacher.getName());
+                    recordFound.setLogin(teacher.getLogin());
+                    recordFound.setPassword(teacher.getPassword());
                     recordFound.setTeacherCode(teacher.getTeacherCode());
                     recordFound.setSpecialty(teacher.getSpecialty());
-                    recordFound.setAcademic_degree(teacher.getAcademic_degree());
+                    recordFound.setEducationLevel(teacher.getEducationLevel());
                     recordFound.setSituation(teacher.isSituation());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));

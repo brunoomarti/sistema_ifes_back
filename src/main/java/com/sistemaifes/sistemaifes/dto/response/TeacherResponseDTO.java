@@ -2,21 +2,17 @@ package com.sistemaifes.sistemaifes.dto.response;
 
 import com.sistemaifes.sistemaifes.model.Teacher;
 
-public record TeacherResponseDTO(
-    Long _id,
-    String name,
+public record TeacherResponseDTO( 
     String teacherCode,
     String specialty,
-    String academic_degree,
+    String educationLevel,
     boolean situation
 ) {
     public TeacherResponseDTO(Teacher teacher){
-        this(
-            teacher.get_id(),
-            teacher.getName(),
+        this( 
             teacher.getTeacherCode(),
             teacher.getSpecialty(),
-            teacher.getAcademic_degree(),
+            teacher.getEducationLevel(),
             teacher.isSituation()
         );
     }

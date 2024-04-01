@@ -1,14 +1,17 @@
 package com.sistemaifes.sistemaifes.dto.request;
 
-import com.sistemaifes.sistemaifes.model.Coordinator;
+import com.sistemaifes.sistemaifes.model.Coordination;
 
-public record TeacherRequestDTO(
+public record TeacherRequestDTO( 
     String name,
     String teacherCode,
     String specialty,
-    String academic_degree,
+    String educationLevel,
     boolean situation,
-    Coordinator coordinator
+    boolean isCoordinator,
+    String login,
+    String password,
+    Coordination coordination
 ) {
     
 }

@@ -3,11 +3,9 @@ package com.sistemaifes.sistemaifes.model;
 import com.sistemaifes.sistemaifes.dto.request.TeacherRequestDTO;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Entity; 
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne; 
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,14 +18,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Teacher {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long _id;
-
-    @Column(length = 100, nullable = false)
-    private String name;
-
+public class Teacher extends User {  
+    
     @Column(nullable = false)
     private String teacherCode;
 
@@ -35,20 +27,27 @@ public class Teacher {
     private String specialty;
 
     @Column(nullable = false)
-    private String academic_degree;
+    private String educationLevel;
 
     @Column(nullable = false)
     private boolean situation;
 
-    @OneToOne(mappedBy = "teacher")
-    private Coordinator coordinator;
+    @Column(nullable = false)
+    private boolean isCoordinator;
+
+    @ManyToOne
+    @JoinColumn(name = "id_coordination")
+    private Coordination coordination;
     
-    public Teacher(TeacherRequestDTO data) {
-       this.name = data.name();
+    public Teacher(TeacherRequestDTO data) { 
+       this.setName(data.name());
+       this.setLogin(data.login());
+       this.setPassword(data.password());
        this.teacherCode = data.teacherCode();
        this.specialty = data.specialty();
-       this.academic_degree = data.academic_degree();
+       this.educationLevel = data.educationLevel();
        this.situation = data.situation();
-       this.coordinator = data.coordinator();
+       this.isCoordinator = data.isCoordinator();
+       this.coordination = data.coordination();
     }
 }

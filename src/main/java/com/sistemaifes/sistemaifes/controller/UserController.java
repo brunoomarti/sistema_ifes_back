@@ -13,48 +13,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.sistemaifes.sistemaifes.dto.request.TeacherRequestDTO;
-import com.sistemaifes.sistemaifes.dto.response.TeacherResponseDTO;
-import com.sistemaifes.sistemaifes.model.Teacher;
-import com.sistemaifes.sistemaifes.service.TeacherService;
+ 
+import com.sistemaifes.sistemaifes.dto.request.UserRequestDTO; 
+import com.sistemaifes.sistemaifes.dto.response.UserResponseDTO; 
+import com.sistemaifes.sistemaifes.model.User;
+import com.sistemaifes.sistemaifes.service.UserService;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @RestController
-@RequestMapping("api/teacher")
-public class TeacherController {
-    private final TeacherService teacherService;
+@RequestMapping("api/user")
+public class UserController {
+    private final UserService userService;
 
-    public TeacherController(TeacherService teacherService) {
-        this.teacherService = teacherService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
-    public @ResponseBody List<TeacherResponseDTO> getAll(){
-        return teacherService.getAll();
+    public @ResponseBody List<UserResponseDTO> getAll(){
+        return userService.getAll();
     }
     
     @PostMapping("/new")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Teacher saveTeacher(@RequestBody TeacherRequestDTO data){ 
-        return teacherService.saveTeacher(data);
+    public User saveUser(@RequestBody UserRequestDTO data){ 
+        return userService.saveUser(data);
     }
 
     @GetMapping("/{id}")
-    public Teacher findById(@PathVariable @NotNull @Positive Long id){
-        return teacherService.findById(id);
+    public User findById(@PathVariable @NotNull @Positive Long id){
+        return userService.findById(id);
     }
 
     @PutMapping("/edit/{id}")
-    public Teacher update(@PathVariable @NotNull @Positive Long id, @RequestBody Teacher teacher){
-        return teacherService.update(id, teacher);
+    public User update(@PathVariable @NotNull @Positive Long id, @RequestBody User user){
+        return userService.update(id, user);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){
-        teacherService.delete(id);
+        userService.delete(id);
     }
 }

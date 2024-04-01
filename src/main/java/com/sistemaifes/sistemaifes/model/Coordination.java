@@ -1,11 +1,15 @@
 package com.sistemaifes.sistemaifes.model;
 
+import java.util.List;
+
 import com.sistemaifes.sistemaifes.dto.request.CoordinationRequestDTO; 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id; 
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -28,13 +32,17 @@ public class Coordination {
     private String name;
 
     @Column(nullable = false)
-    private String acronym; // Sigla
+    private String acronym;  
 
     @Column(nullable = false)
     private String description;
 
     @OneToOne
+    @JoinColumn(name = "id_coordinator")
     private Coordinator coordinator;
+
+    @OneToMany(mappedBy = "coordination")
+    private List<Teacher> teacher;
 
     public Coordination(CoordinationRequestDTO data) {
         this.name = data.name();

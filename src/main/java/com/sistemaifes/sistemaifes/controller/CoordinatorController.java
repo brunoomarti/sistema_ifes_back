@@ -38,8 +38,9 @@ public class CoordinatorController {
 
     @PostMapping("/new")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Coordinator saveEquipment(@RequestBody CoordinatorRequestDTO data){
-        return coordinatorService.saveEquipment(data);
+    public Coordinator saveCoordinator(@RequestBody CoordinatorRequestDTO data){
+        System.out.println(data);
+        return coordinatorService.saveCoordinator(data);
     }
 
     @GetMapping("/{id}")

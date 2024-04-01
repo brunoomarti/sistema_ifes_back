@@ -1,0 +1,9 @@
+package com.sistemaifes.sistemaifes.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.sistemaifes.sistemaifes.model.User;
+
+public interface UserRepository extends JpaRepository<User, Long>{
+
+}
