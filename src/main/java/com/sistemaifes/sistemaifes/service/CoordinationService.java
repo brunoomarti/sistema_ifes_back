@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
  
-import com.sistemaifes.sistemaifes.dto.request.CoordinationRequestDTO; 
+import com.sistemaifes.sistemaifes.dto.request.CoordinationRequestDTO;
+import com.sistemaifes.sistemaifes.dto.request.CoordinatorRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.CoordinationResponseDTO; 
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException; 
 import com.sistemaifes.sistemaifes.model.Coordination;
+import com.sistemaifes.sistemaifes.model.Coordinator;
 import com.sistemaifes.sistemaifes.repository.CoordinationRepository;
 
 import jakarta.validation.Valid;

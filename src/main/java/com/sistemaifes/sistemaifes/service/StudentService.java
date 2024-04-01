@@ -41,8 +41,6 @@ public class StudentService {
         return repository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(student.getName());
-                    recordFound.setLogin(student.getLogin());
-                    recordFound.setPassword(student.getPassword());
                     recordFound.setStudentCode(student.getStudentCode());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));

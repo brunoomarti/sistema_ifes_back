@@ -41,9 +41,8 @@ public class TeacherService {
         return repository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(teacher.getName());
-                    recordFound.setLogin(teacher.getLogin());
-                    recordFound.setPassword(teacher.getPassword());
                     recordFound.setTeacherCode(teacher.getTeacherCode());
+                    recordFound.setCoordinator(teacher.isCoordinator());
                     recordFound.setSpecialty(teacher.getSpecialty());
                     recordFound.setEducationLevel(teacher.getEducationLevel());
                     recordFound.setSituation(teacher.isSituation());

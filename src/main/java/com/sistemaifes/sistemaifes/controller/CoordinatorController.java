@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sistemaifes.sistemaifes.dto.request.CoordinatorRequestDTO;
-import com.sistemaifes.sistemaifes.dto.response.CoordinatorResponseDTO;
-import com.sistemaifes.sistemaifes.model.Coordinator;
+import com.sistemaifes.sistemaifes.dto.response.CoordinatorResponseDTO; 
+import com.sistemaifes.sistemaifes.model.Coordinator; 
 import com.sistemaifes.sistemaifes.service.CoordinatorService;
 
 import jakarta.validation.constraints.NotNull;
@@ -25,7 +25,7 @@ import jakarta.validation.constraints.Positive;
 @RestController
 @RequestMapping("api/coordinator")
 public class CoordinatorController {
-    private final CoordinatorService coordinatorService;
+    private final CoordinatorService coordinatorService; 
 
     public CoordinatorController(CoordinatorService coordinatorService) {
         this.coordinatorService = coordinatorService;
@@ -39,7 +39,6 @@ public class CoordinatorController {
     @PostMapping("/new")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Coordinator saveCoordinator(@RequestBody CoordinatorRequestDTO data){
-        System.out.println(data);
         return coordinatorService.saveCoordinator(data);
     }
 

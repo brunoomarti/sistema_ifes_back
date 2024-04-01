@@ -41,8 +41,6 @@ public class UserService {
         return repository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(user.getName());
-                    recordFound.setLogin(user.getLogin());
-                    recordFound.setPassword(user.getPassword());
                     recordFound.setEstahAtivo(user.isEstahAtivo());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));

@@ -4,10 +4,14 @@ import com.sistemaifes.sistemaifes.model.Coordination;
 import com.sistemaifes.sistemaifes.model.Coordinator;
 
 public record CoordinatorResponseDTO(
+    Long _id,
+    String name,
     Coordination coordination
 ){
     public CoordinatorResponseDTO(Coordinator coordinator){
         this(
+           coordinator.get_id(),
+           coordinator.getName(),
            coordinator.getCoordination() 
         );
     }

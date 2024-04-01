@@ -35,12 +35,9 @@ public class Coordination {
     private String acronym;  
 
     @Column(nullable = false)
-    private String description;
+    private String description; 
 
-    @OneToOne
-    @JoinColumn(name = "id_coordinator")
-    private Coordinator coordinator;
-
+    
     @OneToMany(mappedBy = "coordination")
     private List<Teacher> teacher;
 
@@ -49,4 +46,5 @@ public class Coordination {
         this.acronym = data.acronym();
         this.description = data.description();
     }
+    
 }

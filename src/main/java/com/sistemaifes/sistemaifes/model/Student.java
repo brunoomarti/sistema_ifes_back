@@ -21,8 +21,6 @@ public class Student extends User{
     
     public Student(StudentRequestDTO data) {
         this.setName(data.name());
-        this.setLogin(data.login());
-        this.setPassword(data.password());
         this.studentCode = data.studentCode();
     }
 }

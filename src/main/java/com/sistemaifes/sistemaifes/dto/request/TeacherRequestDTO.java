@@ -9,8 +9,6 @@ public record TeacherRequestDTO(
     String educationLevel,
     boolean situation,
     boolean isCoordinator,
-    String login,
-    String password,
     Coordination coordination
 ) {
     
