@@ -8,7 +8,7 @@ public record TeacherRequestDTO(
     String specialty,
     String educationLevel,
     boolean situation,
-    boolean isCoordinator,
+    boolean coordinator,
     Coordination coordination
 ) {
     

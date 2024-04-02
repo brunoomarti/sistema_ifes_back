@@ -33,7 +33,7 @@ public class Teacher extends User {
     private boolean situation;
 
     @Column(nullable = false)
-    private boolean isCoordinator;
+    private boolean coordinator;
 
     @ManyToOne
     @JoinColumn(name = "id_coordination")
@@ -45,7 +45,7 @@ public class Teacher extends User {
        this.specialty = data.specialty();
        this.educationLevel = data.educationLevel();
        this.situation = data.situation();
-       this.isCoordinator = data.isCoordinator();
+       this.coordinator = data.coordinator();
        this.coordination = data.coordination();
     }
 }

@@ -10,7 +10,7 @@ public record TeacherResponseDTO(
     String specialty,
     String educationLevel,
     boolean situation,
-    boolean isCoordinator,
+    boolean coordinator,
     Coordination coordination
 ) {
     public TeacherResponseDTO(Teacher teacher){
