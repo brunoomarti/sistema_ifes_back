@@ -18,7 +18,6 @@ import jakarta.validation.constraints.Positive;
 @Service
 public class TeacherService {
     private final TeacherRepository repository;
-
     public TeacherService(TeacherRepository repository){
         this.repository = repository;
     }
@@ -46,6 +45,7 @@ public class TeacherService {
                     recordFound.setSpecialty(teacher.getSpecialty());
                     recordFound.setEducationLevel(teacher.getEducationLevel());
                     recordFound.setSituation(teacher.isSituation());
+                    recordFound.setCoordination(teacher.getCoordination());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
