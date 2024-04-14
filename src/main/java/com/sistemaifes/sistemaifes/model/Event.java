@@ -1,8 +1,9 @@
 package com.sistemaifes.sistemaifes.model;
- 
-import java.util.List;
 
-import com.sistemaifes.sistemaifes.dto.request.EquipmentRequestDTO;
+import java.time.LocalDate;
+import java.util.Date;
+
+import com.sistemaifes.sistemaifes.dto.request.EventRequestDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,24 +18,32 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "equipment")
+@Table(name = "event")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Equipment {
+public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long _id;
 
-    @Column(length = 100, nullable = false)
-    private String name;
+    @Column
+    private String description;
 
-    @OneToMany(mappedBy = "equipment")
-    private List<EquipmentLocal> local;
+    @Column
+    private LocalDate eventDate;
 
-    public Equipment(EquipmentRequestDTO data) {
-        this.name = data.name();
+    @Column
+    private Date startTime;
+
+    @Column
+    private Date endTime;
+
+    public Event(EventRequestDTO data){
+        this.description = data.description();
+        this.eventDate = data.eventDate();
+        this.startTime = data.startTime();
+        this.endTime = data.endTime();
     }
-    
 }

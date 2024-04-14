@@ -1,8 +1,8 @@
 package com.sistemaifes.sistemaifes.model;
- 
+
 import java.util.List;
 
-import com.sistemaifes.sistemaifes.dto.request.EquipmentRequestDTO;
+import com.sistemaifes.sistemaifes.dto.request.LocalRequestDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,12 +17,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "equipment")
+@Table(name = "local")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Equipment {
+public class Local {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long _id;
@@ -30,11 +30,14 @@ public class Equipment {
     @Column(length = 100, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "equipment")
-    private List<EquipmentLocal> local;
+    @Column
+    private Integer capacity;
 
-    public Equipment(EquipmentRequestDTO data) {
+    @OneToMany(mappedBy = "local")
+    private List<EquipmentLocal> equipments;
+
+    public Local(LocalRequestDTO data){
         this.name = data.name();
+        this.capacity = data.capacity();
     }
-    
 }
