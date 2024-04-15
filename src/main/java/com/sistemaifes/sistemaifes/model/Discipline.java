@@ -7,6 +7,7 @@ import com.sistemaifes.sistemaifes.dto.request.DisciplineRequestDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,7 +32,7 @@ public class Discipline {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "discipline")
+    @OneToMany(mappedBy = "discipline") 
     @JsonIgnore
     private List<Lesson> lessons;
     

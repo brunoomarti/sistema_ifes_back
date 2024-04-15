@@ -1,7 +1,9 @@
 package com.sistemaifes.sistemaifes.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.EquipmentLocalRequestDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,8 +32,9 @@ public class EquipmentLocal {
     @JoinColumn(name = "id_equipmento")
     private Equipment equipment;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_local")
+    @JsonIgnore
     private Local local;
     
     @Column

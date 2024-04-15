@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.TeacherRequestDTO;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity; 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -43,7 +44,7 @@ public class Teacher extends User {
     @JoinColumn(name = "id_coordination")
     private Coordination coordination;
     
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher") 
     @JsonIgnore
     private List<Lesson> lessons;
     

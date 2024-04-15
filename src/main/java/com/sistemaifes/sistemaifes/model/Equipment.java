@@ -7,6 +7,7 @@ import com.sistemaifes.sistemaifes.dto.request.EquipmentRequestDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,7 +32,7 @@ public class Equipment {
     @Column(length = 100, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "equipment")
+    @OneToMany(mappedBy = "equipment") 
     @JsonIgnore
     private List<EquipmentLocal> local;
 

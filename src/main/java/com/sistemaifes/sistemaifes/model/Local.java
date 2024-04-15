@@ -7,6 +7,7 @@ import com.sistemaifes.sistemaifes.dto.request.LocalRequestDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,12 +35,17 @@ public class Local {
     @Column
     private Integer capacity;
 
-    @OneToMany(mappedBy = "local")
+    @OneToMany(mappedBy = "local") 
     @JsonIgnore
     private List<EquipmentLocal> equipments;
+
+    @Column
+    private boolean allocated;
 
     public Local(LocalRequestDTO data){
         this.name = data.name();
         this.capacity = data.capacity();
+        this.allocated = data.allocated();
+        this.equipments = data.equipments();
     }
 }
