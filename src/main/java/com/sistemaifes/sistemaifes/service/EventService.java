@@ -40,9 +40,7 @@ public class EventService {
         return repository.findById(id)
                 .map(recordFound -> {
                     recordFound.setDescription(event.getDescription());
-                    recordFound.setEventDate(event.getEventDate());
-                    recordFound.setStartTime(event.getStartTime());
-                    recordFound.setEndTime(event.getEndTime());
+                    recordFound.setAllocated(event.isAllocated());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }

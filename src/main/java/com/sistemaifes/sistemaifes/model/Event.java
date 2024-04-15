@@ -1,8 +1,5 @@
 package com.sistemaifes.sistemaifes.model;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 import com.sistemaifes.sistemaifes.dto.request.EventRequestDTO;
 
 import jakarta.persistence.Column;
@@ -10,7 +7,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,21 +25,17 @@ public class Event {
     private Long _id;
 
     @Column
+    private String name;
+
+    @Column
     private String description;
 
     @Column
-    private LocalDate eventDate;
-
-    @Column
-    private Date startTime;
-
-    @Column
-    private Date endTime;
+    private boolean allocated;
 
     public Event(EventRequestDTO data){
+        this.name = data.name();
         this.description = data.description();
-        this.eventDate = data.eventDate();
-        this.startTime = data.startTime();
-        this.endTime = data.endTime();
+        this.allocated = data.allocated();
     }
 }

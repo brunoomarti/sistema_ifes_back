@@ -2,6 +2,7 @@ package com.sistemaifes.sistemaifes.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.LocalRequestDTO;
 
 import jakarta.persistence.Column;
@@ -34,6 +35,7 @@ public class Local {
     private Integer capacity;
 
     @OneToMany(mappedBy = "local")
+    @JsonIgnore
     private List<EquipmentLocal> equipments;
 
     public Local(LocalRequestDTO data){
