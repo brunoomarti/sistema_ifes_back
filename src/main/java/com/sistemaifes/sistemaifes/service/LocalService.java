@@ -63,10 +63,28 @@ public class LocalService {
     }
     
     public Local update(@NotNull @Positive Long id, @Valid Local local){
-        return repository.findById(id)
-                .map(recordFound -> {
+        List<EquipmentLocal> equipmentLocals = local.getEquipments();
+        List<EquipmentLocal> newEquipList = new LinkedList<>();
+        EquipmentLocal savedEquipmentLocal = null;
+
+        if (equipmentLocals != null){
+            for (EquipmentLocal equipmentLocal : equipmentLocals) { 
+                savedEquipmentLocal = new EquipmentLocal();
+
+                savedEquipmentLocal.setQuantity(equipmentLocal.getQuantity());
+                savedEquipmentLocal.setEquipment(equipmentLocal.getEquipment());
+                savedEquipmentLocal.setLocal(local);
+
+                equipmentLocalRepository.save(savedEquipmentLocal); 
+
+                newEquipList.add(savedEquipmentLocal);
+            }
+        }
+
+        return repository.findById(id).map(recordFound -> {
                     recordFound.setName(local.getName());
                     recordFound.setCapacity(local.getCapacity());
+                    recordFound.setEquipments(newEquipList);
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }

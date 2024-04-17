@@ -13,7 +13,8 @@ public record LessonRequestDTO(
     Semester semester,
     Discipline discipline,
     Teacher teacher,
-    List<Student> students
+    List<Student> students,
+    Boolean allocated
 ) {
     
 }

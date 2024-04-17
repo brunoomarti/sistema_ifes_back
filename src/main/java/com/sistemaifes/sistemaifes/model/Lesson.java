@@ -5,6 +5,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.LessonRequestDTO;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,6 +42,9 @@ public class Lesson {
     @ManyToOne
     @JoinColumn(name = "id_teacher")
     private Teacher teacher;
+
+    @Column
+    private Boolean allocated;
     
     @ManyToMany
     @JoinTable(
@@ -56,5 +60,6 @@ public class Lesson {
         this.discipline = data.discipline();
         this.teacher = data.teacher();
         this.students = data.students();
+        this.allocated = data.allocated();
     }
 }

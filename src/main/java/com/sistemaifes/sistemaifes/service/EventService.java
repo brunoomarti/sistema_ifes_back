@@ -39,6 +39,7 @@ public class EventService {
     public Event update(@NotNull @Positive Long id, @Valid Event event){
         return repository.findById(id)
                 .map(recordFound -> {
+                    recordFound.setName(event.getName());
                     recordFound.setDescription(event.getDescription());
                     recordFound.setAllocated(event.isAllocated());
                     return repository.save(recordFound);
