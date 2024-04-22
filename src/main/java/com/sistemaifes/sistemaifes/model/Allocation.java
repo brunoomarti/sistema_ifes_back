@@ -33,10 +33,10 @@ public class Allocation {
     private Long _id;
 
     @Column
-    private Date startDate;
+    private String startDate;
 
     @Column
-    private Date endDate;
+    private String endDate;
 
     @Column(length = 100, nullable = false)
     private String type;

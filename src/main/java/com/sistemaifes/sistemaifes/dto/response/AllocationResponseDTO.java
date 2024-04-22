@@ -12,8 +12,8 @@ import com.sistemaifes.sistemaifes.model.Local;
 
 public record AllocationResponseDTO(
     Long _id,
-    Date startDate,
-    Date endDate,
+    String startDate,
+    String endDate,
     String type,
     List<Lesson> lessons,
     List<Event> events,

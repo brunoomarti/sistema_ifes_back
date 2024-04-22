@@ -1,6 +1,5 @@
 package com.sistemaifes.sistemaifes.dto.request;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.sistemaifes.sistemaifes.model.AllocSchedule;
@@ -11,8 +10,8 @@ import com.sistemaifes.sistemaifes.model.Local;
 
 public record AllocationRequestDTO(
     Long _id,
-    Date startDate,
-    Date endDate,
+    String startDate,
+    String endDate,
     String type,
     List<Lesson> lessons,
     List<Event> events,

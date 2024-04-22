@@ -1,5 +1,6 @@
 package com.sistemaifes.sistemaifes.model;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -29,11 +30,11 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long _id;
 
-    @Column
-    private Date startTime;
+    @Column(length = 100, nullable = false)
+    private String startTime;
 
-    @Column
-    private Date endTime;
+    @Column(length = 100, nullable = false)
+    private String endTime;
 
     @OneToMany(mappedBy = "schedule") 
     @JsonIgnore
