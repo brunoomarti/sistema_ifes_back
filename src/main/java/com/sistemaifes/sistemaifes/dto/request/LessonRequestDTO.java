@@ -1,8 +1,7 @@
 package com.sistemaifes.sistemaifes.dto.request;
 
 import java.util.List;
-
-import com.sistemaifes.sistemaifes.model.Allocation;
+ 
 import com.sistemaifes.sistemaifes.model.Discipline;
 import com.sistemaifes.sistemaifes.model.Semester;
 import com.sistemaifes.sistemaifes.model.Student;
@@ -14,8 +13,7 @@ public record LessonRequestDTO(
     Discipline discipline,
     Teacher teacher,
     List<Student> students,
-    Boolean allocated,
-    Allocation allocation
+    Boolean allocated 
 ) {
     
 }

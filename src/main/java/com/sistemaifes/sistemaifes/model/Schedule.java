@@ -1,19 +1,12 @@
 package com.sistemaifes.sistemaifes.model;
 
-import java.time.LocalTime;
-import java.util.Date;
+ 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.ScheduleRequestDTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,9 +29,14 @@ public class Schedule {
     @Column(length = 100, nullable = false)
     private String endTime;
 
-    @OneToMany(mappedBy = "schedule") 
+    @ManyToMany
+    @JoinTable(
+        name = "schedule_allocation",
+        joinColumns = @JoinColumn(name = "id_schedule"),
+        inverseJoinColumns = @JoinColumn(name = "id_allocation")
+    )
     @JsonIgnore
-    private List<AllocSchedule> allocations;
+    private List<Allocation> allocation;
 
     public Schedule(ScheduleRequestDTO data){
         this.startTime = data.startTime();

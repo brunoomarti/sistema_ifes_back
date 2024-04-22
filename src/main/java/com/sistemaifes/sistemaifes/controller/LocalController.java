@@ -48,4 +48,9 @@ public class LocalController {
     public void delete(@PathVariable @NotNull @Positive Long id){
         localService.delete(id);
     }
+
+    @GetMapping("/availableLocal")
+    public @ResponseBody List<Local> getAllClientsActiveAndDebit() {
+        return localService.getAllUnallocatedLocationst();
+    }
 }

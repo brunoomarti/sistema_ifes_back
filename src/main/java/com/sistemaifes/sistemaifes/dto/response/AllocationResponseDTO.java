@@ -1,9 +1,5 @@
 package com.sistemaifes.sistemaifes.dto.response;
 
-import java.util.Date;
-import java.util.List;
-
-import com.sistemaifes.sistemaifes.model.AllocSchedule;
 import com.sistemaifes.sistemaifes.model.Allocation;
 import com.sistemaifes.sistemaifes.model.Classe;
 import com.sistemaifes.sistemaifes.model.Event;
@@ -15,11 +11,10 @@ public record AllocationResponseDTO(
     String startDate,
     String endDate,
     String type,
-    List<Lesson> lessons,
-    List<Event> events,
+    Lesson lesson,
+    Event event,
     Local location,
-    Classe classe,
-    List<AllocSchedule> selectedTimes
+    Classe classe
 ) {
     public AllocationResponseDTO(Allocation allocation){
         this(
@@ -27,11 +22,10 @@ public record AllocationResponseDTO(
             allocation.getStartDate(),
             allocation.getEndDate(),
             allocation.getType(),
-            allocation.getLessons(),
-            allocation.getEvents(),
+            allocation.getLesson(),
+            allocation.getEvent(),
             allocation.getLocation(),
-            allocation.getClasse(),
-            allocation.getSelectedTimes()
+            allocation.getClasse()
         );
     }
 }

@@ -3,7 +3,7 @@ package com.sistemaifes.sistemaifes.model;
 
 import com.sistemaifes.sistemaifes.dto.request.CoordinatorRequestDTO;
 
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;

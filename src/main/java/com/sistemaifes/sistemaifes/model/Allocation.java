@@ -1,20 +1,11 @@
 package com.sistemaifes.sistemaifes.model;
-
-import java.util.Date;
+ 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.AllocationRequestDTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,13 +32,13 @@ public class Allocation {
     @Column(length = 100, nullable = false)
     private String type;
 
-    @OneToMany(mappedBy = "allocation") 
-    @JsonIgnore
-    private List<Lesson> lessons;
+    @ManyToOne
+    @JoinColumn(name = "id_lesson")
+    private Lesson lesson;
 
-    @OneToMany(mappedBy = "allocation") 
-    @JsonIgnore
-    private List<Event> events;
+    @ManyToOne
+    @JoinColumn(name = "id_event")
+    private Event event;
 
     @ManyToOne
     @JoinColumn(name = "id_location")
@@ -57,9 +48,8 @@ public class Allocation {
     @JoinColumn(name = "id_classe")
     private Classe classe;
 
-    @OneToMany(mappedBy = "allocation") 
-    @JsonIgnore
-    private List<AllocSchedule> selectedTimes;
+    @ManyToMany(mappedBy = "allocation")
+    private List<Schedule> schedules;
 
     @OneToMany(mappedBy = "allocation") 
     @JsonIgnore
@@ -69,11 +59,10 @@ public class Allocation {
         this.startDate = data.startDate();
         this.endDate = data.endDate();
         this.type = data.type();
-        this.lessons = data.lessons();
-        this.events = data.events();
+        this.lesson = data.lesson();
+        this.event = data.event();
         this.location = data.location();
         this.classe = data.classe();
-        this.selectedTimes = data.selectedTimes();
     }
 
 }

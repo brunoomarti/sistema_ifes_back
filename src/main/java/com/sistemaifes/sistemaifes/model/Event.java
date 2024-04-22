@@ -1,5 +1,8 @@
 package com.sistemaifes.sistemaifes.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.EventRequestDTO;
 
 import jakarta.persistence.Column;
@@ -7,8 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,14 +37,13 @@ public class Event {
     @Column
     private boolean allocated;
 
-    @ManyToOne
-    @JoinColumn(name = "id_allocation")
-    private Allocation allocation;
+    @OneToMany(mappedBy = "event")
+    @JsonIgnore
+    private List<Allocation> allocations;
 
     public Event(EventRequestDTO data){
         this.name = data.name();
         this.description = data.description();
         this.allocated = data.allocated();
-        this.allocation = data.allocation();
     }
 }

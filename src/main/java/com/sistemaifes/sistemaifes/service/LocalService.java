@@ -94,5 +94,10 @@ public class LocalService {
             .orElseThrow(() -> new RecordNotFoundException(id)));
     }
 
+    public List<Local> getAllUnallocatedLocationst() {
+        return repository.findAllUnallocatedLocations().stream().toList();
+
+    }
+
 
 } 
