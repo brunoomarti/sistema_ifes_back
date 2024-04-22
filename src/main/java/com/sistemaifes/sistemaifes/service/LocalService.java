@@ -49,7 +49,7 @@ public class LocalService {
  
                 savedEquipmentLocal.setQuantity(equipmentLocal.getQuantity());
                 savedEquipmentLocal.setEquipment(equipmentLocal.getEquipment());
-                savedEquipmentLocal.setLocal(localData);
+                savedEquipmentLocal.setLocation(localData);
 
                 equipmentLocalRepository.save(savedEquipmentLocal); 
 
@@ -73,7 +73,7 @@ public class LocalService {
 
                 savedEquipmentLocal.setQuantity(equipmentLocal.getQuantity());
                 savedEquipmentLocal.setEquipment(equipmentLocal.getEquipment());
-                savedEquipmentLocal.setLocal(local);
+                savedEquipmentLocal.setLocation(local);
 
                 equipmentLocalRepository.save(savedEquipmentLocal); 
 

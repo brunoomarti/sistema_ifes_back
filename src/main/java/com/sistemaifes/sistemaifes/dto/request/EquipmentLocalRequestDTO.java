@@ -6,7 +6,7 @@ import com.sistemaifes.sistemaifes.model.Local;
 public record EquipmentLocalRequestDTO(
     Long _id,
     Equipment equipment,
-    Local local,
+    Local location,
     Integer quantity
 ) {
 }

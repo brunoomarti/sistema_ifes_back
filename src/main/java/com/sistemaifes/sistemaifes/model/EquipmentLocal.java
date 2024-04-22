@@ -33,16 +33,16 @@ public class EquipmentLocal {
     private Equipment equipment;
     
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_local")
+    @JoinColumn(name = "id_location")
     @JsonIgnore
-    private Local local;
+    private Local location;
     
     @Column
     private Integer quantity;
 
     public EquipmentLocal(EquipmentLocalRequestDTO data){
         this.equipment = data.equipment();
-        this.local = data.local();
+        this.location = data.location();
         this.quantity = data.quantity();
     }
 }

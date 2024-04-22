@@ -1,8 +1,9 @@
 package com.sistemaifes.sistemaifes.model;
 
-import com.sistemaifes.sistemaifes.dto.request.EventRequestDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sistemaifes.sistemaifes.dto.request.AllocScheduleRequestDTO;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,33 +17,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "event")
+@Table(name = "alloc_schedule")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Event {
+public class AllocSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long _id;
 
-    @Column
-    private String name;
-
-    @Column
-    private String description;
-
-    @Column
-    private boolean allocated;
-
     @ManyToOne
+    @JoinColumn(name = "id_schedule")
+    private Schedule schedule;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_allocation")
+    @JsonIgnore
     private Allocation allocation;
 
-    public Event(EventRequestDTO data){
-        this.name = data.name();
-        this.description = data.description();
-        this.allocated = data.allocated();
+    public AllocSchedule(AllocScheduleRequestDTO data){
+        this.schedule = data.schedule();
         this.allocation = data.allocation();
     }
+
 }

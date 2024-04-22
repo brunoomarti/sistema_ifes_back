@@ -43,6 +43,10 @@ public class Lesson {
     @JoinColumn(name = "id_teacher")
     private Teacher teacher;
 
+    @ManyToOne
+    @JoinColumn(name = "id_allocation")
+    private Allocation allocation;
+
     @Column
     private Boolean allocated;
     
@@ -60,6 +64,7 @@ public class Lesson {
         this.discipline = data.discipline();
         this.teacher = data.teacher();
         this.students = data.students();
+        this.allocation = data.allocation();
         this.allocated = data.allocated();
     }
 }

@@ -14,7 +14,7 @@ public record EquipmentLocalResponseDTO(
         this(
             equipmentLocal.get_id(), 
             equipmentLocal.getEquipment(),
-            equipmentLocal.getLocal(),
+            equipmentLocal.getLocation(),
             equipmentLocal.getQuantity()
         );
     }

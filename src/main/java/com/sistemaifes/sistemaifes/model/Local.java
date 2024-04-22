@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "local")
+@Table(name = "location")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -35,9 +35,13 @@ public class Local {
     @Column
     private Integer capacity;
 
-    @OneToMany(mappedBy = "local") 
+    @OneToMany(mappedBy = "location") 
     @JsonIgnore
     private List<EquipmentLocal> equipments;
+
+    @OneToMany(mappedBy = "location") 
+    @JsonIgnore
+    private List<Allocation> allocations;
 
     @Column
     private boolean allocated;
