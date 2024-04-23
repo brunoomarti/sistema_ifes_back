@@ -30,12 +30,6 @@ public class Schedule {
     private String endTime;
 
     @ManyToMany
-    @JoinTable(
-        name = "schedule_allocation",
-        joinColumns = @JoinColumn(name = "id_schedule"),
-        inverseJoinColumns = @JoinColumn(name = "id_allocation")
-    )
-    @JsonIgnore
     private List<Allocation> allocation;
 
     public Schedule(ScheduleRequestDTO data){

@@ -57,7 +57,6 @@ public class Lesson {
         joinColumns = @JoinColumn(name = "id_lesson"),
         inverseJoinColumns = @JoinColumn(name = "id_student")
     )
-    @JsonIgnore
     private List<Student> students;
 
     public Lesson(LessonRequestDTO data){

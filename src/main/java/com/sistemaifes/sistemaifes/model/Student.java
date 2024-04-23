@@ -21,7 +21,7 @@ public class Student extends User {
     @Column(nullable = false)
     private String studentCode;
     
-    @ManyToMany(mappedBy = "students")
+    @ManyToMany
     private List<Lesson> lessons;
 
     public Student(StudentRequestDTO data) {

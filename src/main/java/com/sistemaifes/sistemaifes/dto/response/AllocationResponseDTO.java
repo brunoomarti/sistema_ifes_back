@@ -1,10 +1,13 @@
 package com.sistemaifes.sistemaifes.dto.response;
 
+import java.util.List;
+
 import com.sistemaifes.sistemaifes.model.Allocation;
 import com.sistemaifes.sistemaifes.model.Classe;
 import com.sistemaifes.sistemaifes.model.Event;
 import com.sistemaifes.sistemaifes.model.Lesson;
 import com.sistemaifes.sistemaifes.model.Local;
+import com.sistemaifes.sistemaifes.model.Schedule;
 
 public record AllocationResponseDTO(
     Long _id,
@@ -14,7 +17,8 @@ public record AllocationResponseDTO(
     Lesson lesson,
     Event event,
     Local location,
-    Classe classe
+    Classe classe,
+    List<Schedule> selectedTimes
 ) {
     public AllocationResponseDTO(Allocation allocation){
         this(
@@ -25,7 +29,8 @@ public record AllocationResponseDTO(
             allocation.getLesson(),
             allocation.getEvent(),
             allocation.getLocation(),
-            allocation.getClasse()
+            allocation.getClasse(),
+            allocation.getSelectedTimes()
         );
     }
 }

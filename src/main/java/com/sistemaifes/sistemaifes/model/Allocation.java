@@ -48,8 +48,13 @@ public class Allocation {
     @JoinColumn(name = "id_classe")
     private Classe classe;
 
-    @ManyToMany(mappedBy = "allocation")
-    private List<Schedule> schedules;
+    @ManyToMany
+    @JoinTable(
+        name = "allocation_schedule",
+        joinColumns = @JoinColumn(name = "allocation_id"),
+        inverseJoinColumns = @JoinColumn(name = "schedule_id")
+    )
+    private List<Schedule> selectedTimes;
 
     @OneToMany(mappedBy = "allocation") 
     @JsonIgnore
