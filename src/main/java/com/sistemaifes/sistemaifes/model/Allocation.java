@@ -65,6 +65,7 @@ public class Allocation {
         this.endDate = data.endDate();
         this.type = data.type();
         this.lesson = data.lesson();
+        this.selectedTimes = data.selectedTimes();
         this.event = data.event();
         this.location = data.location();
         this.classe = data.classe();

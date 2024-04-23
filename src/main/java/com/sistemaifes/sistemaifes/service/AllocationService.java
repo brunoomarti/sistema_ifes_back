@@ -36,10 +36,10 @@ public class AllocationService {
 
     public Allocation saveAllocation(AllocationRequestDTO data){
         Allocation allocationData = new Allocation(data);
-        Local localData = allocationData.getLocation();
-        localData.setAllocated(true);
+        // Local localData = allocationData.getLocation();
+        // localData.setAllocated(true);
 
-        localRepository.save(localData);
+        // localRepository.save(localData);
 
         return repository.save(allocationData);
     }
