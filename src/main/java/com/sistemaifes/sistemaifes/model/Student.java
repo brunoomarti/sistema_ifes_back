@@ -21,7 +21,7 @@ public class Student extends User {
     @Column(nullable = false)
     private String studentCode;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     private List<Lesson> lessons;
 
     public Student(StudentRequestDTO data) {

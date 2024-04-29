@@ -29,8 +29,20 @@ public class Allocation {
     @Column
     private String endDate;
 
+    @Column
+    private String startTime;
+
+    @Column
+    private String endTime;
+
+    @Column(length = 20)
+    private String weekDay;
+
     @Column(length = 100, nullable = false)
     private String type;
+
+    @Column
+    private String applicant;
 
     @ManyToOne
     @JoinColumn(name = "id_lesson")
@@ -63,7 +75,11 @@ public class Allocation {
     public Allocation(AllocationRequestDTO data) {
         this.startDate = data.startDate();
         this.endDate = data.endDate();
+        this.startTime = data.startTime();
+        this.endTime = data.endTime();
+        this.weekDay = data.weekDay();
         this.type = data.type();
+        this.applicant = data.applicant();
         this.lesson = data.lesson();
         this.selectedTimes = data.selectedTimes();
         this.event = data.event();

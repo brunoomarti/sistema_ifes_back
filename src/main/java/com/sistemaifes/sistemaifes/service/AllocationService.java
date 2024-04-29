@@ -49,7 +49,11 @@ public class AllocationService {
                 .map(recordFound -> {
                     recordFound.setStartDate(allocation.getStartDate());
                     recordFound.setEndDate(allocation.getEndDate());
+                    recordFound.setStartTime(allocation.getStartTime());
+                    recordFound.setEndTime(allocation.getEndTime());
+                    recordFound.setWeekDay(allocation.getWeekDay());
                     recordFound.setType(allocation.getType());
+                    recordFound.setApplicant(allocation.getApplicant());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }

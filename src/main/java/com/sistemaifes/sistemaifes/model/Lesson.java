@@ -52,7 +52,7 @@ public class Lesson {
     @Column
     private Boolean allocated;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
         name = "lesson_student",
         joinColumns = @JoinColumn(name = "id_lesson"),
