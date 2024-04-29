@@ -57,4 +57,10 @@ public class LessonController {
     public void delete(@PathVariable @NotNull @Positive Long id){
         lessonService.delete(id);
     }
+
+    @DeleteMapping("/removeStudent/{studentId}/{lessonId}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void removeStudentFromLesson(@PathVariable @NotNull @Positive Long studentId, @PathVariable @NotNull @Positive Long lessonId){
+        lessonService.removeStudentFromLesson(studentId, lessonId);
+    }
 }

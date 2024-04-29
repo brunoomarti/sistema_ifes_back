@@ -9,7 +9,9 @@ import com.sistemaifes.sistemaifes.dto.request.LessonRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.LessonResponseDTO;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
 import com.sistemaifes.sistemaifes.model.Lesson;
+import com.sistemaifes.sistemaifes.model.Student;
 import com.sistemaifes.sistemaifes.repository.LessonRepository;
+import com.sistemaifes.sistemaifes.repository.StudentRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -18,9 +20,11 @@ import jakarta.validation.constraints.Positive;
 @Service
 public class LessonService {
     private final LessonRepository repository;
+    private final StudentRepository studentRepository;
 
-    public LessonService(LessonRepository repository){
+    public LessonService(LessonRepository repository, StudentRepository studentRepository){
         this.repository = repository;
+        this.studentRepository = studentRepository;
     }
 
     public List<LessonResponseDTO> getAll() {
@@ -51,5 +55,16 @@ public class LessonService {
     public void delete(@PathVariable @NotNull Long id){
         repository.delete(repository.findById(id)
             .orElseThrow(() -> new RecordNotFoundException(id)));
+    }
+
+    public void removeStudentFromLesson(Long studentId, Long lessonId) {
+        Student student =  studentRepository.findById(studentId)
+                                    .orElseThrow(() -> new RecordNotFoundException(studentId));
+
+        Lesson lesson = repository.findById(lessonId)
+                        .orElseThrow(() -> new RecordNotFoundException(lessonId));                         
+        
+        repository.removeStudentFromLesson(studentId, lessonId);
+        
     }
 }

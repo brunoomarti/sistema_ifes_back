@@ -3,7 +3,6 @@ package com.sistemaifes.sistemaifes.model;
  
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.ScheduleRequestDTO;
 
 import jakarta.persistence.*;
