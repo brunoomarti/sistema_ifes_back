@@ -39,12 +39,20 @@ public class HistoryService {
         return repository.findById(id)
                 .map(recordFound -> {
                     recordFound.setDate(history.getDate());
-                    recordFound.setAction(history.getAction());
                     recordFound.setAuthorName(history.getAuthorName());
-                    recordFound.setTime(history.getTime());
-                    recordFound.setOldContent(history.getOldContent());
-                    recordFound.setNewContent(history.getNewContent());
-                    recordFound.setAllocation(history.getAllocation());
+                    recordFound.setChangeType(history.getChangeType());
+                    recordFound.setStartDate(history.getStartDate());
+                    recordFound.setEndDate(history.getEndDate());
+                    recordFound.setStartTime(history.getStartTime());
+                    recordFound.setEndTime(history.getEndTime());
+                    recordFound.setWeekDay(history.getWeekDay());
+                    recordFound.setType(history.getType());
+                    recordFound.setApplicant(history.getApplicant());
+                    recordFound.setLesson(history.getLesson());
+                    recordFound.setEvent(history.getEvent());
+                    recordFound.setLocation(history.getLocation());
+                    recordFound.setClasse(history.getClasse());
+                    recordFound.setSelectedTimes(history.getSelectedTimes());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
