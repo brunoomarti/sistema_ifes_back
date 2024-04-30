@@ -54,6 +54,9 @@ public class AllocationService {
                     recordFound.setWeekDay(allocation.getWeekDay());
                     recordFound.setType(allocation.getType());
                     recordFound.setApplicant(allocation.getApplicant());
+                    recordFound.setClasse(allocation.getClasse());
+                    recordFound.setLocation(allocation.getLocation());
+                    recordFound.setSelectedTimes(allocation.getSelectedTimes());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }

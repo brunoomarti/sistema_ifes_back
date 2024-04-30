@@ -46,9 +46,6 @@ public class History {
     private String changeType;
 
     @Column
-    private LocalTime time;
-
-     @Column
     private String startDate;
 
     @Column
@@ -85,18 +82,9 @@ public class History {
     @JoinColumn(name = "id_classe")
     private Classe classe;
 
-    @ManyToMany
-    @JoinTable(
-        name = "allocation_schedule",
-        joinColumns = @JoinColumn(name = "allocation_id"),
-        inverseJoinColumns = @JoinColumn(name = "schedule_id")
-    )
-    private List<Schedule> selectedTimes;
-
-    // @OneToMany(mappedBy = "history") 
-    // @JsonIgnore
-    // private List<History> histories;
-
+    @Column
+    private String selectedTimes;
+    
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_allocation")
     @JsonIgnore
