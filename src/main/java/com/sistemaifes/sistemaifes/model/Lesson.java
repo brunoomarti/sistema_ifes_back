@@ -45,6 +45,9 @@ public class Lesson {
     @JoinColumn(name = "id_teacher")
     private Teacher teacher;
 
+    @Column(nullable = false)
+    private Integer weeklyQuantity;
+
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Allocation> allocations;
@@ -64,6 +67,7 @@ public class Lesson {
         this.semester = data.semester();
         this.discipline = data.discipline();
         this.teacher = data.teacher();
+        this.weeklyQuantity = data.weeklyQuantity();
         this.students = data.students();
         this.allocated = data.allocated();
     }

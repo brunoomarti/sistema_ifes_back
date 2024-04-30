@@ -47,6 +47,7 @@ public class LessonService {
                     recordFound.setSemester(lesson.getSemester());
                     recordFound.setStudents(lesson.getStudents());
                     recordFound.setTeacher(lesson.getTeacher());
+                    recordFound.setWeeklyQuantity(lesson.getWeeklyQuantity());
                     recordFound.setAllocated(lesson.getAllocated());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));

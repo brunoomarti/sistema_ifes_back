@@ -13,6 +13,7 @@ public record LessonResponseDTO(
     Semester semester,
     Discipline discipline,
     Teacher teacher,
+    int weeklyQuantity,
     List<Student> students,
     Boolean allocated
 ) {
@@ -22,6 +23,7 @@ public record LessonResponseDTO(
             lesson.getSemester(),
             lesson.getDiscipline(),
             lesson.getTeacher(),
+            lesson.getWeeklyQuantity(),
             lesson.getStudents(),
             lesson.getAllocated()
         );

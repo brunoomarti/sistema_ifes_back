@@ -12,6 +12,7 @@ public record LessonRequestDTO(
     Semester semester,
     Discipline discipline,
     Teacher teacher,
+    int weeklyQuantity,
     List<Student> students,
     Boolean allocated 
 ) {
