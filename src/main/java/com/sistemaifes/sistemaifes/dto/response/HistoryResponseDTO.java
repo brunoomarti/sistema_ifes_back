@@ -28,7 +28,7 @@ public record HistoryResponseDTO(
     Event event,
     Local location,
     Classe classe,
-    List<Schedule> selectedTimes
+    String selectedTimes
 ) {
     public HistoryResponseDTO(History history){
         this(

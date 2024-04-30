@@ -32,6 +32,9 @@ public class Event {
     private String name;
 
     @Column
+    private String applicant;
+
+    @Column
     private String description;
 
     @Column
@@ -43,6 +46,7 @@ public class Event {
 
     public Event(EventRequestDTO data){
         this.name = data.name();
+        this.applicant = data.applicant();
         this.description = data.description();
         this.allocated = data.allocated();
     }

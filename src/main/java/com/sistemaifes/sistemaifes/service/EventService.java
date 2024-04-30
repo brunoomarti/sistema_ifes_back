@@ -41,6 +41,7 @@ public class EventService {
                 .map(recordFound -> {
                     recordFound.setName(event.getName());
                     recordFound.setDescription(event.getDescription());
+                    recordFound.setApplicant(event.getApplicant());
                     recordFound.setAllocated(event.isAllocated());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));

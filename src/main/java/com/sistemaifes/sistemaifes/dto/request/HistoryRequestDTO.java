@@ -25,7 +25,7 @@ public record HistoryRequestDTO(
     Event event,
     Local location,
     Classe classe,
-    List<Schedule> selectedTimes
+    String selectedTimes
     
 ) {
     
