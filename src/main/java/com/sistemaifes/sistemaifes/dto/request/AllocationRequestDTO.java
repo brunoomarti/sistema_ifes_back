@@ -22,7 +22,8 @@ public record AllocationRequestDTO(
     Event event,
     Local location,
     Classe classe,
-    List<Schedule> selectedTimes
+    List<Schedule> selectedTimes,
+    Boolean active
 ) {
     
 }

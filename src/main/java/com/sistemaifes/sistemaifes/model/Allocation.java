@@ -72,6 +72,9 @@ public class Allocation {
     @JsonIgnore
     private List<History> histories;
 
+    @Column
+    private Boolean active;
+
     public Allocation(AllocationRequestDTO data) {
         this.startDate = data.startDate();
         this.endDate = data.endDate();
@@ -85,6 +88,7 @@ public class Allocation {
         this.event = data.event();
         this.location = data.location();
         this.classe = data.classe();
+        this.active = data.active();
     }
 
 }

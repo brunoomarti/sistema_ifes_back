@@ -86,7 +86,7 @@ public class History {
     private String selectedTimes;
     
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_allocation")
+    @JoinColumn(name = "id_allocation", nullable = false)
     @JsonIgnore
     private Allocation allocation;
 

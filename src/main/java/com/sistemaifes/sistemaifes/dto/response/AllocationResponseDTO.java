@@ -22,7 +22,8 @@ public record AllocationResponseDTO(
     Event event,
     Local location,
     Classe classe,
-    List<Schedule> selectedTimes
+    List<Schedule> selectedTimes,
+    Boolean active
 ) {
     public AllocationResponseDTO(Allocation allocation){
         this(
@@ -38,7 +39,8 @@ public record AllocationResponseDTO(
             allocation.getEvent(),
             allocation.getLocation(),
             allocation.getClasse(),
-            allocation.getSelectedTimes()
+            allocation.getSelectedTimes(),
+            allocation.getActive()
         );
     }
 }

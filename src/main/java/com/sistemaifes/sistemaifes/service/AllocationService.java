@@ -57,6 +57,7 @@ public class AllocationService {
                     recordFound.setClasse(allocation.getClasse());
                     recordFound.setLocation(allocation.getLocation());
                     recordFound.setSelectedTimes(allocation.getSelectedTimes());
+                    recordFound.setActive(allocation.getActive());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
