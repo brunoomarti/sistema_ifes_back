@@ -28,6 +28,7 @@ public record HistoryResponseDTO(
     Event event,
     Local location,
     Classe classe,
+    Allocation allocation,
     String selectedTimes
 ) {
     public HistoryResponseDTO(History history){
@@ -47,6 +48,7 @@ public record HistoryResponseDTO(
             history.getEvent(),
             history.getLocation(),
             history.getClasse(),
+            history.getAllocation(),
             history.getSelectedTimes()
         );
     }

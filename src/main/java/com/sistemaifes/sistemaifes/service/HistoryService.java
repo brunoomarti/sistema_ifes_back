@@ -22,7 +22,7 @@ public class HistoryService {
         this.repository = repository;
     }
 
-        public List<HistoryResponseDTO> getAll() {
+    public List<HistoryResponseDTO> getAll() {
         return repository.findAll().stream().map((HistoryResponseDTO::new)).toList();
     }
 

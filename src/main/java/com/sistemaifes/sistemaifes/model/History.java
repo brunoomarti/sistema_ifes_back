@@ -85,7 +85,7 @@ public class History {
     @Column
     private String selectedTimes;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_allocation", nullable = false)
     @JsonIgnore
     private Allocation allocation;
@@ -96,8 +96,8 @@ public class History {
         this.changeType = data.changeType();
         this.startDate = data.startDate();
         this.endDate = data.endDate();
-        this.startDate = data.startDate();
-        this.endDate = data.endTime();
+        this.startTime = data.startTime();
+        this.endTime = data.endTime();
         this.weekDay = data.weekDay();
         this.type = data.type();
         this.applicant = data.applicant();
@@ -105,6 +105,7 @@ public class History {
         this.event = data.event();
         this.location = data.location();
         this.classe = data.classe();
+        this.allocation = data.allocation();
         this.selectedTimes = data.selectedTimes();
 
     }
