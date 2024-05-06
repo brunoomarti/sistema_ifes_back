@@ -1,5 +1,6 @@
 package com.sistemaifes.sistemaifes.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sistemaifes.sistemaifes.dto.request.StudentRequestDTO;
+import com.sistemaifes.sistemaifes.dto.request.StudentScheduleRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.StudentResponseDTO;
+import com.sistemaifes.sistemaifes.model.Equipment;
 import com.sistemaifes.sistemaifes.model.Student;
+import com.sistemaifes.sistemaifes.model.StudentSchedule;
 import com.sistemaifes.sistemaifes.service.StudentService;
 
 import jakarta.validation.constraints.NotNull;
@@ -57,5 +61,10 @@ public class StudentController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){
         studentService.delete(id);
+    }
+
+    @GetMapping("/schedule/{studentCode}")
+    public List<StudentSchedule> getStudentSchedule(@PathVariable @NotNull String studentCode){
+        return studentService.getStudentSchedule(studentCode);
     }
 }
