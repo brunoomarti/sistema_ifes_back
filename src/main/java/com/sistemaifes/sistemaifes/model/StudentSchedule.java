@@ -22,13 +22,13 @@ public class StudentSchedule {
     private Long id_studentSchedule;
 
     private String name;
-    private String _id;
+    private String id_lesson;
     private String start_time;
     private String end_time;
 
     public StudentSchedule(StudentScheduleRequestDTO data){
         this.name = data.name();
-        this._id = data._id();
+        this.id_lesson = data.id_lesson();
         this.start_time = data.start_time();
         this.end_time = data.end_time();
     }

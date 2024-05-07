@@ -24,8 +24,13 @@ public class Student extends User {
     @ManyToMany(cascade = CascadeType.REMOVE)
     private List<Lesson> lessons;
 
+    @ManyToOne
+    @JoinColumn(name = "id_course")
+    private Course course;
+
     public Student(StudentRequestDTO data) {
         this.setName(data.name());
         this.studentCode = data.studentCode();
+        this.course = data.course();
     }
 }

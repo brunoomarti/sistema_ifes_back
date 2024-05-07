@@ -3,17 +3,15 @@ package com.sistemaifes.sistemaifes.dto.response;
 import com.sistemaifes.sistemaifes.model.StudentSchedule;
 
 public record StudentScheduleResponseDTO(
-    Long id_studentSchedule,
     String name,
-    String _id,
+    String id_lesson,
     String start_time,
     String end_time  
 ) {
     public StudentScheduleResponseDTO(StudentSchedule student){
-        this(
-            student.getId_studentSchedule(),
+        this( 
             student.getName(),
-            student.get_id(),
+            student.getId_lesson(),
             student.getStart_time(),
             student.getEnd_time()
         );

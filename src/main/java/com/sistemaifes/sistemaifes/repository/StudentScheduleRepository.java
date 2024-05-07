@@ -10,7 +10,7 @@ import com.sistemaifes.sistemaifes.model.StudentSchedule;
 public interface StudentScheduleRepository extends JpaRepository<StudentSchedule, Long> {
 
     @Query(value = """ 
-        SELECT user_ifes.name, Lesson._id, schedule.start_time, schedule.end_time, 0 AS id_student_schedule
+        SELECT user_ifes.name, Lesson._id as id_lesson, schedule.start_time, schedule.end_time, 0 AS id_student_schedule
         FROM Student
         JOIN lesson_student ON Student._id = lesson_student.id_student
         JOIN Lesson ON lesson_student.id_lesson = Lesson._id
