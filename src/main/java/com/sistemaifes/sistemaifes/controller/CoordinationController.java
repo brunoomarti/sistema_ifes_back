@@ -36,7 +36,7 @@ public class CoordinationController {
         return coordinationService.getAll();
     }
 
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Coordination saveCoordination(@RequestBody CoordinationRequestDTO data){
         return coordinationService.saveCoordination(data);
@@ -47,7 +47,7 @@ public class CoordinationController {
         return coordinationService.findById(id);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Coordination update(@PathVariable @NotNull @Positive Long id, @RequestBody Coordination coordination){
         return coordinationService.update(id, coordination);
     }

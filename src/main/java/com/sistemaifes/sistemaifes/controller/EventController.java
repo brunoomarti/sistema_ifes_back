@@ -36,7 +36,7 @@ public class EventController {
         return eventService.getAll();
     }
     
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Event saveEvent(@RequestBody EventRequestDTO data){ 
         return eventService.saveEvent(data);
@@ -47,7 +47,7 @@ public class EventController {
         return eventService.findById(id);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Event update(@PathVariable @NotNull @Positive Long id, @RequestBody Event event){
         return eventService.update(id, event);
     }

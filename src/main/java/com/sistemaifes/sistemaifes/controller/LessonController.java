@@ -36,7 +36,7 @@ public class LessonController {
         return lessonService.getAll();
     }
     
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Lesson saveEvent(@RequestBody LessonRequestDTO data){ 
         return lessonService.saveEvent(data);
@@ -47,7 +47,7 @@ public class LessonController {
         return lessonService.findById(id);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Lesson update(@PathVariable @NotNull @Positive Long id, @RequestBody Lesson lesson){
         return lessonService.update(id, lesson);
     }

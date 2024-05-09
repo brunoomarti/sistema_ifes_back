@@ -14,47 +14,47 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sistemaifes.sistemaifes.dto.request.TeacherRequestDTO;
-import com.sistemaifes.sistemaifes.dto.response.TeacherResponseDTO;
-import com.sistemaifes.sistemaifes.model.Teacher;
-import com.sistemaifes.sistemaifes.service.TeacherService;
+import com.sistemaifes.sistemaifes.dto.request.CourseRequestDTO;
+import com.sistemaifes.sistemaifes.dto.response.CourseResponseDTO;
+import com.sistemaifes.sistemaifes.model.Course;
+import com.sistemaifes.sistemaifes.service.CourseService;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 @RestController
-@RequestMapping("api/teacher")
-public class TeacherController {
-    private final TeacherService teacherService;
+@RequestMapping("api/course")
+public class CourseController {
+    private CourseService courseService;
 
-    public TeacherController(TeacherService teacherService) {
-        this.teacherService = teacherService;
+    public CourseController(CourseService courseService){
+        this.courseService = courseService;
     }
 
     @GetMapping
-    public @ResponseBody List<TeacherResponseDTO> getAll(){
-        return teacherService.getAll();
+    public @ResponseBody List<CourseResponseDTO> getAll(){
+        return courseService.getAll();
     }
     
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Teacher saveTeacher(@RequestBody TeacherRequestDTO data){ 
-        return teacherService.saveTeacher(data);
+    public Course saveCourse(@RequestBody CourseRequestDTO data){
+        return courseService.saveCourse(data);
     }
 
     @GetMapping("/{id}")
-    public Teacher findById(@PathVariable @NotNull @Positive Long id){
-        return teacherService.findById(id);
+    public Course findById(@PathVariable @NotNull @Positive Long id){
+        return courseService.findById(id);
     }
 
     @PutMapping("/{id}")
-    public Teacher update(@PathVariable @NotNull @Positive Long id, @RequestBody Teacher teacher){
-        return teacherService.update(id, teacher);
+    public Course update(@PathVariable @NotNull @Positive Long id, @RequestBody Course course){
+        return courseService.update(id, course);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){
-        teacherService.delete(id);
+        courseService.delete(id);
     }
 }

@@ -37,7 +37,7 @@ public class ClasseController {
         return classeService.getAll();
     }
 
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Classe save(@RequestBody ClasseRequestDTO data){
         return classeService.save(data);
@@ -53,7 +53,7 @@ public class ClasseController {
         return classeService.findEquipmentByName(name);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("{id}")
     public Classe update(@PathVariable @NotNull @Positive Long id, @RequestBody Classe classe){
         return classeService.update(id, classe);
     }

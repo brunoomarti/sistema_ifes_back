@@ -36,7 +36,7 @@ public class UserController {
         return userService.getAll();
     }
     
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public User saveUser(@RequestBody UserRequestDTO data){ 
         return userService.saveUser(data);
@@ -47,7 +47,7 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public User update(@PathVariable @NotNull @Positive Long id, @RequestBody User user){
         return userService.update(id, user);
     }

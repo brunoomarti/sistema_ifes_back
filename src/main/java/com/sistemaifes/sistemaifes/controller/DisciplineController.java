@@ -36,7 +36,7 @@ public class DisciplineController {
         return disciplineService.getAll();
     }
     
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Discipline saveDiscipline(@RequestBody DisciplineRequestDTO data){
         return disciplineService.saveDiscipline(data);
@@ -47,7 +47,7 @@ public class DisciplineController {
         return disciplineService.findById(id);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Discipline update(@PathVariable @NotNull @Positive Long id, @RequestBody Discipline discipline){
         return disciplineService.update(id, discipline);
     }

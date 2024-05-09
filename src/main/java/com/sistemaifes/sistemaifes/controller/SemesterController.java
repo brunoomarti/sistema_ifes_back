@@ -36,7 +36,7 @@ public class SemesterController {
         return semesterService.getAll();
     }
     
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Semester saveSchedule(@RequestBody SemesterRequestDTO data){ 
         return semesterService.saveSemester(data);
@@ -47,7 +47,7 @@ public class SemesterController {
         return semesterService.findById(id);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Semester update(@PathVariable @NotNull @Positive Long id, @RequestBody Semester semester){
         return semesterService.update(id, semester);
     }

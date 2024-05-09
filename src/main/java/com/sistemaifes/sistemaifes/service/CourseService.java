@@ -35,8 +35,6 @@ public class CourseService {
         Course cordData = new Course(data);
         return repository.save(cordData);
     }
- 
-
     public Course update(@NotNull @Positive Long id, @Valid Course course){
         return repository.findById(id)
                 .map(recordFound -> {
