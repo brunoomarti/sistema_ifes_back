@@ -40,6 +40,7 @@ public class AllocationController {
     @PostMapping("/new")
     @ResponseStatus(code = HttpStatus.CREATED)
     public Allocation saveAllocation(@RequestBody AllocationRequestDTO data){
+        System.out.println("\n\n\n" + data + "\n\n\n");
         return allocationService.saveAllocation(data);
     }
 
