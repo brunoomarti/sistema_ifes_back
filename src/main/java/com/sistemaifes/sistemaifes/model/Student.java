@@ -25,7 +25,7 @@ public class Student extends User {
     private List<Lesson> lessons;
 
     @ManyToOne
-    @JoinColumn(name = "id_course")
+    @JoinColumn(name = "id_course", nullable = false)
     private Course course;
 
     public Student(StudentRequestDTO data) {

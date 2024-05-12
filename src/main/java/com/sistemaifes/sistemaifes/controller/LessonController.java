@@ -3,16 +3,7 @@ package com.sistemaifes.sistemaifes.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.sistemaifes.sistemaifes.dto.request.LessonRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.LessonResponseDTO;
@@ -62,5 +53,13 @@ public class LessonController {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void removeStudentFromLesson(@PathVariable @NotNull @Positive Long studentId, @PathVariable @NotNull @Positive Long lessonId){
         lessonService.removeStudentFromLesson(studentId, lessonId);
+    }
+
+    @GetMapping("/getLessons/{studentCode}/{semesterId}")
+    public List<LessonResponseDTO> findLessonsByStudentCodeAndSemesterId(
+            @PathVariable String studentCode,
+            @PathVariable Long semesterId
+    ){
+        return lessonService.findLessonsByStudentCodeAndSemesterId(studentCode, semesterId);
     }
 }

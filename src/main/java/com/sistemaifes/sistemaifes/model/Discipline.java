@@ -25,16 +25,20 @@ public class Discipline {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private String acronym;
+
     @OneToMany(mappedBy = "discipline") 
     @JsonIgnore
     private List<Lesson> lessons; 
 
     @ManyToOne
-    @JoinColumn(name = "id_course")
+    @JoinColumn(name = "id_course", nullable = false)
     private Course course;
    
     public Discipline(DisciplineRequestDTO data) {
         this.name = data.name();
+        this.acronym = data.acronym();
         this.course = data.course();
     }
 }

@@ -68,4 +68,9 @@ public class LessonService {
         repository.removeStudentFromLesson(studentId, lessonId);
         
     }
+
+    public List<LessonResponseDTO> findLessonsByStudentCodeAndSemesterId(String studentCode, Long semesterId) {
+        return repository.findLessonsByStudentCodeAndSemesterId(studentCode , semesterId)
+                .stream().map((LessonResponseDTO::new)).toList();
+    }
 }

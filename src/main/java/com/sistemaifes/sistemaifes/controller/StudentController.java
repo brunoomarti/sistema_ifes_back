@@ -65,6 +65,7 @@ public class StudentController {
 
     @GetMapping("/schedule/{studentCode}")
     public List<StudentSchedule> getStudentSchedule(@PathVariable @NotNull String studentCode){
+        System.out.println(studentCode);
         return studentService.getStudentSchedule(studentCode);
     }
 }

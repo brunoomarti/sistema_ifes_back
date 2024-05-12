@@ -46,6 +46,7 @@ public class StudentService {
                 .map(recordFound -> {
                     recordFound.setName(student.getName());
                     recordFound.setStudentCode(student.getStudentCode());
+                    recordFound.setCourse(student.getCourse());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
@@ -57,6 +58,7 @@ public class StudentService {
 
     public List<StudentSchedule> getStudentSchedule(String studentCode){
         Student s = repository.findByStudentCode(studentCode);
+        System.out.println(s);
         return studentScheduleRepository.getStudentSchedule(s.get_id());
     }
 }

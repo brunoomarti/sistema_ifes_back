@@ -7,8 +7,23 @@ import org.springframework.data.jpa.repository.Query;
 import com.sistemaifes.sistemaifes.model.Lesson;
 
 import jakarta.transaction.Transactional;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface LessonRepository extends JpaRepository<Lesson, Long>{
+
+    @Query("SELECT l FROM Lesson l " +
+            "JOIN l.students s " +
+            "JOIN l.semester sem " +
+            "WHERE s.studentCode = :studentCode " +
+            "AND sem._id = :semesterId")
+    List<Lesson> findLessonsByStudentCodeAndSemesterId(
+            @Param("studentCode") String studentCode,
+            @Param("semesterId") Long semesterId
+    );
+
+
     
     @Transactional
     @Modifying
