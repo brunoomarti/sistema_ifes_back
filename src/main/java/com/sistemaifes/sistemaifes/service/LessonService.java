@@ -73,4 +73,9 @@ public class LessonService {
         return repository.findLessonsByStudentCodeAndSemesterId(studentCode , semesterId)
                 .stream().map((LessonResponseDTO::new)).toList();
     }
+
+    public List<LessonResponseDTO> findLessonsByTeacherCodeAndSemesterId(String teacherCode, Long semesterId) {
+        return repository.findLessonsByTeacherCodeAndSemesterId(teacherCode , semesterId)
+                .stream().map((LessonResponseDTO::new)).toList();
+    }
 }
