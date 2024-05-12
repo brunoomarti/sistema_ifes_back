@@ -25,9 +25,11 @@ public interface LessonRepository extends JpaRepository<Lesson, Long>{
 
     @Query("SELECT l FROM Teacher l " +
             "JOIN l.lessons s " +
-            "WHERE s.teacherCode = :teacherCode ")
+            "WHERE s.teacherCode = :teacherCode " +
+            "AND Semester._id = :semesterId")
     List<Lesson> findLessonsByTeacherCodeAndSemesterId(
-            @Param("teacherCode") String studentCode
+            @Param("teacherCode") String studentCode,
+            @Param("semesterId") Long semesterId
     );
 
 
