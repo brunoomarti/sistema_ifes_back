@@ -35,6 +35,10 @@ public class StudentService {
         return repository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
+    public Student idByCode(@PathVariable @NotNull @Positive String studentCode){
+        return repository.idByCode(studentCode);
+    }
+
     public Student saveStudent(StudentRequestDTO data){
         Student dataStudent = new Student(data);
         dataStudent.setEstahAtivo(true);

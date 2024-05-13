@@ -63,7 +63,7 @@ public class LessonController {
         return lessonService.findLessonsByStudentCodeAndSemesterId(studentCode, semesterId);
     }
 
-    @GetMapping("/getLessons/{teacherCode}/{semesterId}")
+    @GetMapping("/getLessonsT/{teacherCode}/{semesterId}")
     public List<LessonResponseDTO> findLessonsByTeacherCodeAndSemesterId(
             @PathVariable String teacherCode,
             @PathVariable Long semesterId

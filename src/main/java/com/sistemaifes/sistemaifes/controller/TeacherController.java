@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sistemaifes.sistemaifes.dto.request.TeacherRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.TeacherResponseDTO;
+import com.sistemaifes.sistemaifes.model.Student;
 import com.sistemaifes.sistemaifes.model.Teacher;
 import com.sistemaifes.sistemaifes.service.TeacherService;
 
@@ -45,6 +46,11 @@ public class TeacherController {
     @GetMapping("/{id}")
     public Teacher findById(@PathVariable @NotNull @Positive Long id){
         return teacherService.findById(id);
+    }
+
+    @GetMapping("/idByCode/{teacherCode}")
+    public Teacher idByCode(@PathVariable @NotNull @Positive String teacherCode){
+        return teacherService.idByCode(teacherCode);
     }
 
     @PutMapping("/edit/{id}")

@@ -1,6 +1,5 @@
 package com.sistemaifes.sistemaifes.controller;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -16,9 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sistemaifes.sistemaifes.dto.request.StudentRequestDTO;
-import com.sistemaifes.sistemaifes.dto.request.StudentScheduleRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.StudentResponseDTO;
-import com.sistemaifes.sistemaifes.model.Equipment;
 import com.sistemaifes.sistemaifes.model.Student;
 import com.sistemaifes.sistemaifes.model.StudentSchedule;
 import com.sistemaifes.sistemaifes.service.StudentService;
@@ -50,6 +47,11 @@ public class StudentController {
     @GetMapping("/{id}")
     public Student findById(@PathVariable @NotNull @Positive Long id){
         return studentService.findById(id);
+    }
+
+    @GetMapping("/idByCode/{studentCode}")
+    public Student idByCode(@PathVariable @NotNull @Positive String studentCode){
+        return studentService.idByCode(studentCode);
     }
 
     @PutMapping("/edit/{id}")

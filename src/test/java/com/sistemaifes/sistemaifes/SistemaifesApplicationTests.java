@@ -27,10 +27,10 @@ class SistemaifesApplicationTests {
 		Long semesterId = 1L;
 
 		// Chama o serviço diretamente
-		List<LessonResponseDTO> lessons = lessonService.findLessonsByStudentRegistrationAndSemesterId(registrationNumber, semesterId);
+		// List<LessonResponseDTO> lessons = lessonService.findLessonsByStudentRegistrationAndSemesterId(registrationNumber, semesterId);
 
 		// Imprime os resultados
-		lessons.forEach(System.out::println);
+		// lessons.forEach(System.out::println);
 	}
 
 }

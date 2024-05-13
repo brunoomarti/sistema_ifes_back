@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.sistemaifes.sistemaifes.dto.request.TeacherRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.TeacherResponseDTO;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
+import com.sistemaifes.sistemaifes.model.Student;
 import com.sistemaifes.sistemaifes.model.Teacher;
 import com.sistemaifes.sistemaifes.repository.TeacherRepository;
 
@@ -28,6 +29,10 @@ public class TeacherService {
 
     public Teacher findById(@PathVariable @NotNull @Positive Long id){
         return repository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
+    }
+
+    public Teacher idByCode(@PathVariable @NotNull @Positive String teacherCode){
+        return repository.idByCode(teacherCode);
     }
 
     public Teacher saveTeacher(TeacherRequestDTO data){
