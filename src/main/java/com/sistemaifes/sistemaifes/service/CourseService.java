@@ -2,6 +2,8 @@ package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
 
+import com.sistemaifes.sistemaifes.exception.InvalidLengthException;
+import com.sistemaifes.sistemaifes.exception.ItemAlreadyRegisteredException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -33,7 +35,20 @@ public class CourseService {
 
     public Course saveCourse(CourseRequestDTO data){
         Course cordData = new Course(data);
+
+        if (cordData.getName().length() > 100 || cordData.getName().length() < 3) {
+            throw new InvalidLengthException("O nome do curso deve ter no máximo 100 caracteres e no minimo 3 caracteres");
+        }
+
+        if (verifyIfEquipmentExist(data.name())){
+            throw new ItemAlreadyRegisteredException(data.name());
+        }
+
         return repository.save(cordData);
+    }
+
+    public boolean verifyIfEquipmentExist(String equipmentName) {
+        return repository.existsByNameIgnoreCase(equipmentName);
     }
  
 

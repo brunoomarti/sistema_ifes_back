@@ -13,10 +13,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "location")
@@ -29,10 +32,12 @@ public class Local {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long _id;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
+    @Length(min = 3, max = 100)
     private String name;
 
     @Column
+    @Positive
     private Integer capacity;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.REMOVE) 

@@ -1,5 +1,6 @@
 package com.sistemaifes.sistemaifes.model;
 
+import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 import com.sistemaifes.sistemaifes.dto.request.UserRequestDTO;
@@ -23,8 +24,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long _id;
  
-    @Length(min = 3, max = 100)
     @Column(length = 100, nullable = false)
+    @Length(min = 3, max = 100)
     private String name;
 
     @Column(nullable = false)

@@ -2,6 +2,7 @@ package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
 
+import com.sistemaifes.sistemaifes.exception.InvalidLengthException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -34,6 +35,10 @@ public class ClasseService {
 
     public Classe save(ClasseRequestDTO data){
         Classe cData = new Classe(data);
+
+        if (cData.getName().length() > 100 || cData.getName().length() < 3) {
+            throw new InvalidLengthException("O nome da classe deve ter no máximo 100 caracteres e no minimo 3 caracteres");
+        }
         
         if (verifyIfEquipmentExist(data.name())){
             throw new ItemAlreadyRegisteredException(data.name());

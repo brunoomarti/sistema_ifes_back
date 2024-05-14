@@ -9,5 +9,4 @@ import com.sistemaifes.sistemaifes.model.Discipline;
 public interface DisciplineRepository extends JpaRepository<Discipline, Long>{
     boolean existsByNameIgnoreCase(String name);
     
-    List<Discipline> findByNameContainingIgnoreCase(String name);
 }

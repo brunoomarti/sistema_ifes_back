@@ -2,6 +2,7 @@ package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
 
+import com.sistemaifes.sistemaifes.exception.ItemAlreadyRegisteredException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -33,8 +34,16 @@ public class DisciplineService {
 
     public Discipline saveDiscipline(DisciplineRequestDTO data){
         Discipline eqData = new Discipline(data);
+
+        if (verifyIfEquipmentExist(data.name())){
+            throw new ItemAlreadyRegisteredException(data.name());
+        }
         
         return repository.save(eqData);
+    }
+
+    public boolean verifyIfEquipmentExist(String equipmentName) {
+        return repository.existsByNameIgnoreCase(equipmentName);
     }
 
     public Discipline update(@NotNull @Positive Long id, @Valid Discipline discipline){

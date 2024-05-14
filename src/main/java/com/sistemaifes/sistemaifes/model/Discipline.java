@@ -6,10 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.DisciplineRequestDTO;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "discipline")
@@ -22,10 +24,12 @@ public class Discipline {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long _id;
 
-    @Column(nullable = false)
+    @Column(length = 100)
+    @Length(min = 3, max = 100)
     private String name;
 
-    @Column(nullable = false)
+    @Column(length = 10)
+    @Length(min = 3, max = 10)
     private String acronym;
 
     @OneToMany(mappedBy = "discipline") 

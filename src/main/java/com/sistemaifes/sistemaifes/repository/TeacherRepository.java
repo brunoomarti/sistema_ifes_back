@@ -10,8 +10,7 @@ import com.sistemaifes.sistemaifes.model.Teacher;
 
 public interface TeacherRepository extends JpaRepository<Teacher, Long>{
     boolean existsByNameIgnoreCase(String name);
-    
-    List<Teacher> findByNameContainingIgnoreCase(String name);
+
 
     @Query("SELECT t FROM Teacher t WHERE t.teacherCode = :teacherCode")
     Teacher idByCode(@Param("teacherCode") String teacherCode);

@@ -33,10 +33,10 @@ public class History {
     @Column
     private Date date;
 
-    @Column(length = 100, nullable = false)
+    @Column
     private String authorName;
 
-    @Column(length = 100, nullable = false)
+    @Column
     private String changeType;
 
     @Column
@@ -54,7 +54,7 @@ public class History {
     @Column(length = 20)
     private String weekDay;
 
-    @Column(length = 100, nullable = false)
+    @Column
     private String type;
 
     @Column

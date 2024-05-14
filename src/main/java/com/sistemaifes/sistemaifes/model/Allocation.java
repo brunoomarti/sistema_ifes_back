@@ -6,10 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.AllocationRequestDTO;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "allocation")
@@ -35,13 +37,14 @@ public class Allocation {
     @Column
     private String endTime;
 
-    @Column(length = 20)
+    @Column
     private String weekDay;
 
-    @Column(length = 100, nullable = false)
+    @Column
     private String type;
 
-    @Column
+    @Column(length = 100)
+    @Length(min = 3, max = 100)
     private String applicant;
 
     @ManyToOne
