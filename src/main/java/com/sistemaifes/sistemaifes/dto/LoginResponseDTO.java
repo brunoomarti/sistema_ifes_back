@@ -1,5 +1,5 @@
 package com.sistemaifes.sistemaifes.dto;
 
-public record LoginResponseDTO(String token) {
+public record LoginResponseDTO(String name, String token) {
     
 }
