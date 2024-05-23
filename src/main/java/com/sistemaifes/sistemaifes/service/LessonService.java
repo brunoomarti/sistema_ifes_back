@@ -1,6 +1,11 @@
 package com.sistemaifes.sistemaifes.service;
 
+import java.time.LocalDateTime;
+import java.util.AbstractMap;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.sistemaifes.sistemaifes.dto.request.LessonRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.LessonResponseDTO;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
+import com.sistemaifes.sistemaifes.model.Allocation;
 import com.sistemaifes.sistemaifes.model.Lesson;
 import com.sistemaifes.sistemaifes.model.Student;
 import com.sistemaifes.sistemaifes.repository.LessonRepository;
@@ -71,6 +77,11 @@ public class LessonService {
 
     public List<LessonResponseDTO> findLessonsByStudentCodeAndSemesterId(String studentCode, Long semesterId) {
         return repository.findLessonsByStudentCodeAndSemesterId(studentCode , semesterId)
+                .stream().map((LessonResponseDTO::new)).toList();
+    }
+
+    public List<LessonResponseDTO> findNextLessonByStudentCode(String studentCode) {
+        return repository.findNextLessonByStudentCode(studentCode)
                 .stream().map((LessonResponseDTO::new)).toList();
     }
 
