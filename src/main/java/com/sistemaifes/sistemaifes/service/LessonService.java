@@ -1,19 +1,16 @@
 package com.sistemaifes.sistemaifes.service;
 
-import java.time.LocalDateTime;
-import java.util.AbstractMap;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
+import com.sistemaifes.sistemaifes.dto.response.StudentLessonScheduleResponseDTO;
+import com.sistemaifes.sistemaifes.model.StudentLessonSchedule;
+import com.sistemaifes.sistemaifes.repository.StudentLessonScheduleRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.sistemaifes.sistemaifes.dto.request.LessonRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.LessonResponseDTO;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
-import com.sistemaifes.sistemaifes.model.Allocation;
 import com.sistemaifes.sistemaifes.model.Lesson;
 import com.sistemaifes.sistemaifes.model.Student;
 import com.sistemaifes.sistemaifes.repository.LessonRepository;
@@ -27,10 +24,15 @@ import jakarta.validation.constraints.Positive;
 public class LessonService {
     private final LessonRepository repository;
     private final StudentRepository studentRepository;
+    private final StudentLessonScheduleRepository studentLessonShedule;
 
-    public LessonService(LessonRepository repository, StudentRepository studentRepository){
+    public LessonService(LessonRepository repository,
+                         StudentRepository studentRepository,
+                         StudentLessonScheduleRepository studentLessonShedule
+    ){
         this.repository = repository;
         this.studentRepository = studentRepository;
+        this.studentLessonShedule = studentLessonShedule;
     }
 
     public List<LessonResponseDTO> getAll() {
@@ -80,9 +82,8 @@ public class LessonService {
                 .stream().map((LessonResponseDTO::new)).toList();
     }
 
-    public List<LessonResponseDTO> findNextLessonByStudentCode(String studentCode) {
-        return repository.findNextLessonByStudentCode(studentCode)
-                .stream().map((LessonResponseDTO::new)).toList();
+    public StudentLessonSchedule findNextLessonByStudentCode(String studentCode) {
+        return studentLessonShedule.findNextLessonByStudentCode(studentCode);
     }
 
     public List<LessonResponseDTO> findLessonsByTeacherCodeAndSemesterId(String teacherCode, Long semesterId) {

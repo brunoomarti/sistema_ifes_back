@@ -2,6 +2,8 @@ package com.sistemaifes.sistemaifes.controller;
 
 import java.util.List;
 
+import com.sistemaifes.sistemaifes.dto.response.StudentLessonScheduleResponseDTO;
+import com.sistemaifes.sistemaifes.model.StudentLessonSchedule;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,5 +71,10 @@ public class LessonController {
             @PathVariable Long semesterId
     ){
         return lessonService.findLessonsByTeacherCodeAndSemesterId(teacherCode, semesterId);
+    }
+
+    @GetMapping("/getNextLesson/{studentCode}")
+    public StudentLessonSchedule findNextLessonByStudentCode(@PathVariable String studentCode){
+        return lessonService.findNextLessonByStudentCode(studentCode);
     }
 }

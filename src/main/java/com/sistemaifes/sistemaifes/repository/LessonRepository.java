@@ -1,11 +1,9 @@
 package com.sistemaifes.sistemaifes.repository;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import com.sistemaifes.sistemaifes.model.Allocation;
 import com.sistemaifes.sistemaifes.model.Lesson;
 
 import jakarta.transaction.Transactional;
@@ -43,17 +41,6 @@ public interface LessonRepository extends JpaRepository<Lesson, Long>{
             @Param("semesterId") Long semesterId
     );
 
-    @Query("SELECT l FROM Lesson l " +
-       "JOIN l.students s " +
-       "JOIN l.allocations a " +
-       "JOIN a.allocation_schedule st " +
-       "WHERE s.studentCode = :studentCode " +
-       "AND st.allocation_id =  " +
-       "ORDER BY st.startTime ASC")
-    List<Lesson> findNextLessonByStudentCode(@Param("studentCode") String studentCode, Pageable pageable);
-
-
-    
     @Transactional
     @Modifying
     @Query(value = """ 
