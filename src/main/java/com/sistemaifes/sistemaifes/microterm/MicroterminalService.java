@@ -3,13 +3,20 @@ package com.sistemaifes.sistemaifes.microterm;
 
 import org.springframework.stereotype.Component;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
+import jakarta.json.stream.JsonParsingException;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import javax.json.*;
 
 @Component
 public class MicroterminalService {
@@ -59,6 +66,7 @@ public class MicroterminalService {
 
                     String studentId = userInput.toString();
                     String response = getAulaInfo(studentId);
+                    System.out.println("\n\n\n" + response + "\n\n\n");
                     displayAulaInfo(response, dos, studentId);
 
                     while (in.read() != 13) {
@@ -78,11 +86,11 @@ public class MicroterminalService {
     }
 
     private String getAulaInfo(String studentId) throws IOException {
-        String apiUrl = "http://localhost:8080/api/aulas/proxima/" + studentId;
+        String apiUrl = "http://localhost:8080/api/lesson/getNextLesson/" + studentId;
         URL url = new URL(apiUrl);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
-
+    
         int responseCode = conn.getResponseCode();
         if (responseCode == HttpURLConnection.HTTP_OK) {
             Scanner scanner = new Scanner(conn.getInputStream());
@@ -92,72 +100,50 @@ public class MicroterminalService {
             }
             scanner.close();
             return response.toString();
+        } else if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+            return "NOT_FOUND";
         } else {
-            return null;
+            return "ERROR";
         }
-    }
-
-
+    }    
 
     private void displayAulaInfo(String response, DataOutputStream dos, String studentId) {
-        if (response != null) {
-            JsonReader reader = Json.createReader(new StringReader(response));
-            JsonObject aulaInfo = reader.readObject();
+        try {
+            clearScreen(dos);
+    
+            if ("NOT_FOUND".equals(response)) {
+                dos.writeBytes("Matricula nao foi encontrada" + "\r\n");
+            } else if ("ERROR".equals(response)) {
+                dos.writeBytes("Ocorreu um erro ao buscar as informacoes" + "\r\n");
+            } else {
+                JsonReader reader = Json.createReader(new StringReader(response));
+                JsonObject aulaInfo = reader.readObject();
+    
+                String student = aulaInfo.getString("studentName").split(" ")[0];
+                String discipline = aulaInfo.getString("disciplineName");
+                String local = aulaInfo.getString("localName");
+                String startTimeTs = aulaInfo.getString("startTimeTs");
 
-            // JsonObject local = aulaInfo.getJsonObject("local");
-            // String localDescription = local.getString("descricao");
-
-            // // Pegando as quatro primeiras letras do primeiro nome do local
-            // String localFirstLetters = localDescription.split(" ")[0].substring(0, Math.min(4, localDescription.split(" ")[0].length()));
-            // // Pegando o restante do nome do local
-            // String localRest = localDescription.replaceFirst(localFirstLetters, "").trim();
-
-
-            // JsonArray horarios = aulaInfo.getJsonArray("horarios");
-            // JsonObject firstHorario = horarios.getJsonObject(0);
-            // String horaInicio = firstHorario.getString("horaInicio");
-
-            // JsonArray alunos = aulaInfo.getJsonArray("alunos");
-            // String firstName = ""; // Inicializa com uma string vazia
-
-            // // Procura pelo aluno com a matrícula fornecida
-            // for (int i = 0; i < alunos.size(); i++) {
-            //     JsonObject aluno = alunos.getJsonObject(i);
-            //     String matricula = aluno.getString("matricula");
-            //     if (matricula.equals(studentId)) {
-            //         // Se encontrar o aluno, atribui o nome à variável firstName e interrompe o loop
-            //         String alunoNome = aluno.getString("nome");
-            //         firstName = alunoNome.split(" ")[0];
-            //         break;
-            //     }
-            // }
-
-            // // Obtém a sigla da disciplina
-            // JsonObject disciplina = aulaInfo.getJsonObject("disciplina");
-            // String siglaDisciplina = disciplina.getString("sigla");
-
-            // try {
-            //     clearScreen(dos);
-
-            //     dos.writeBytes("Ola, " + firstName + "\r\n");
-            //     dos.writeBytes("Disciplina: " + siglaDisciplina + "\r\n"); //aula
-            //     dos.writeBytes("Aula: " + localFirstLetters + " " + localRest + "\r\n"); //local
-            //     dos.writeBytes("Horario: " + horaInicio + "\r\n");
-            // } catch (IOException e) {
-            //     e.printStackTrace();
-            // }
-
-        } else {
-            try {
-                clearScreen(dos);
-                dos.writeBytes("Matricula nao foi" + "\r\n" + "encontrada");
-            } catch (IOException e) {
-                e.printStackTrace();
+                ZonedDateTime startTime = ZonedDateTime.parse(startTimeTs);
+                ZonedDateTime adjustedStartTime = startTime.withZoneSameInstant(ZoneId.of("America/Sao_Paulo"));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                String formattedTime = adjustedStartTime.format(formatter);
+    
+                dos.writeBytes("Ola, " + student + "\r\n");
+                dos.writeBytes("Disciplina: " + discipline + "\r\n");
+                dos.writeBytes("Local: " + local + "\r\n");
+                dos.writeBytes("Horario: " + formattedTime + "\r\n");
             }
-            System.out.println("Error: Unable to fetch class information.");
+        } catch (JsonParsingException e) {
+            try {
+                dos.writeBytes("Aluno não encontrado" + "\r\n");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
-
+    }    
 
     private void clearScreen(DataOutputStream dos) throws IOException {
         dos.writeBytes("\033[H\033[2J");
