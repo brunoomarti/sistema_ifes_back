@@ -18,6 +18,10 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 @Component
 public class MicroterminalService {
     private final int port = 1025;
@@ -85,6 +89,22 @@ public class MicroterminalService {
         }
     }
 
+    private void playAudio() {
+        try {
+            String filepath =  "src/main/java/com/sistemaifes/sistemaifes/sfx/cupcakke.wav";
+            AudioInputStream aui = AudioSystem.getAudioInputStream(new File(filepath).getAbsoluteFile());
+            try {
+                Clip clip = AudioSystem.getClip();
+                clip.open(aui);
+                clip.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private String getAulaInfo(String studentId) throws IOException {
         String apiUrl = "http://localhost:8080/api/lesson/getNextLesson/" + studentId;
         URL url = new URL(apiUrl);
@@ -133,6 +153,8 @@ public class MicroterminalService {
                 dos.writeBytes("Disciplina: " + discipline + "\r\n");
                 dos.writeBytes("Local: " + local + "\r\n");
                 dos.writeBytes("Horario: " + formattedTime + "\r\n");
+
+                playAudio();
             }
         } catch (JsonParsingException e) {
             try {
