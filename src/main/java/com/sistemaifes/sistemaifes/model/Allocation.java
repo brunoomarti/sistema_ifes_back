@@ -71,7 +71,7 @@ public class Allocation {
     )
     private List<Schedule> selectedTimes;
 
-    @OneToMany(mappedBy = "allocation") 
+    @OneToMany(mappedBy = "allocation", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<History> histories;
 

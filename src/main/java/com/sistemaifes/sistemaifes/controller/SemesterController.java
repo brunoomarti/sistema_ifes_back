@@ -53,7 +53,7 @@ public class SemesterController {
     }
 
     @GetMapping("/{id}/records")
-    public List<Object> getCourseRecords(@PathVariable @NotNull @Positive Long id) {
+    public List<Object> getLessonRecords(@PathVariable @NotNull @Positive Long id) {
         return semesterService.getRecordsLesson(id);
     }
     @DeleteMapping("/{id}")

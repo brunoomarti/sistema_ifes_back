@@ -1,8 +1,13 @@
 package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.sistemaifes.sistemaifes.exception.ItemAlreadyRegisteredException;
+import com.sistemaifes.sistemaifes.model.Allocation;
+import com.sistemaifes.sistemaifes.model.Lesson;
+import com.sistemaifes.sistemaifes.repository.LessonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -19,6 +24,9 @@ import jakarta.validation.constraints.Positive;
 @Service
 public class DisciplineService {
     private DisciplineRepository repository;
+
+    @Autowired
+    private LessonRepository lessonRepository;
 
     public DisciplineService(DisciplineRepository repository){
         this.repository = repository;
@@ -58,6 +66,12 @@ public class DisciplineService {
     public void delete(@PathVariable @NotNull Long id){
         repository.delete(repository.findById(id)
             .orElseThrow(() -> new RecordNotFoundException(id)));
+    }
+
+    public List<Object> getRecordsDiscipline(Long disciplineId) {
+        List<Lesson> lessons = lessonRepository.findByDisciplineId(disciplineId);
+
+        return lessons.stream().collect(Collectors.toList());
     }
 
 }

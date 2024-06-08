@@ -66,9 +66,11 @@ public class LessonService {
     }
 
     public void delete(@PathVariable @NotNull Long id){
+        removeAllStudentFromLesson(id);
         repository.delete(repository.findById(id)
             .orElseThrow(() -> new RecordNotFoundException(id)));
     }
+
     public void removeStudentFromLesson(Long studentId, Long lessonId) {
         Student student =  studentRepository.findById(studentId)
                                     .orElseThrow(() -> new RecordNotFoundException(studentId));
@@ -78,6 +80,10 @@ public class LessonService {
         
         repository.removeStudentFromLesson(studentId, lessonId);
         
+    }
+
+    public void removeAllStudentFromLesson(Long lessonId){
+        repository.removeAllStudentFromLesson(lessonId);
     }
 
     public List<LessonResponseDTO> findLessonsByStudentCodeAndSemesterId(String studentCode, Long semesterId) {

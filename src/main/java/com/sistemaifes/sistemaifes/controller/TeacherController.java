@@ -58,6 +58,11 @@ public class TeacherController {
         return teacherService.update(id, teacher);
     }
 
+    @GetMapping("/{id}/records")
+    public List<Object> getRecordsStudent(@PathVariable @NotNull @Positive Long id) {
+        return teacherService.getRecordsTeacher(id);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){

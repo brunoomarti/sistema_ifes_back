@@ -12,4 +12,5 @@ public interface LocalRepository extends JpaRepository<Local, Long> {
     List<Local> findAllUnallocatedLocations();
 
     boolean existsByNameIgnoreCase(String name);
+
 }

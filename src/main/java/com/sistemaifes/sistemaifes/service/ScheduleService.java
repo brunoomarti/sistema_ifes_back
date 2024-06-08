@@ -1,7 +1,12 @@
 package com.sistemaifes.sistemaifes.service;
  
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.sistemaifes.sistemaifes.model.Allocation;
+import com.sistemaifes.sistemaifes.model.Lesson;
+import com.sistemaifes.sistemaifes.repository.AllocationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -18,6 +23,9 @@ import jakarta.validation.constraints.Positive;
 @Service
 public class ScheduleService {
     private final ScheduleRepository repository;
+
+    @Autowired
+    private AllocationRepository allocationRepository;
 
     public ScheduleService(ScheduleRepository repository){
         this.repository = repository;
@@ -54,4 +62,11 @@ public class ScheduleService {
         repository.delete(repository.findById(id)
             .orElseThrow(() -> new RecordNotFoundException(id)));
     }
+
+    public List<Object> getRecordsAllocation(Long scheduleId) {
+        List<Allocation> allocations = allocationRepository.findByScheduleId(scheduleId);
+
+        return allocations.stream().collect(Collectors.toList());
+    }
+
 }

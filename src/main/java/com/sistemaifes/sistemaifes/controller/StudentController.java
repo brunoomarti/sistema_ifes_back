@@ -70,4 +70,9 @@ public class StudentController {
         System.out.println(studentCode);
         return studentService.getStudentSchedule(studentCode);
     }
+
+    @GetMapping("/{id}/records")
+    public List<Object> getRecordsStudent(@PathVariable @NotNull @Positive Long id) {
+        return studentService.getRecordsStudent(id);
+    }
 }

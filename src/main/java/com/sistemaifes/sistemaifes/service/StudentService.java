@@ -1,7 +1,12 @@
 package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.sistemaifes.sistemaifes.model.Allocation;
+import com.sistemaifes.sistemaifes.model.Lesson;
+import com.sistemaifes.sistemaifes.repository.LessonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,6 +26,9 @@ import jakarta.validation.constraints.Positive;
 public class StudentService {
     private final StudentRepository repository;
     private final StudentScheduleRepository studentScheduleRepository;
+
+    @Autowired
+    private LessonRepository lessonRepository;
 
     public StudentService(StudentRepository repository, StudentScheduleRepository studentScheduleRepository){
         this.repository = repository;
@@ -62,7 +70,12 @@ public class StudentService {
 
     public List<StudentSchedule> getStudentSchedule(String studentCode){
         Student s = repository.findByStudentCode(studentCode);
-        System.out.println(s);
         return studentScheduleRepository.getStudentSchedule(s.get_id());
+    }
+
+    public List<Object> getRecordsStudent(Long studentId) {
+        List<Lesson> lessons = lessonRepository.findByStudentId(studentId);
+
+        return lessons.stream().collect(Collectors.toList());
     }
 }

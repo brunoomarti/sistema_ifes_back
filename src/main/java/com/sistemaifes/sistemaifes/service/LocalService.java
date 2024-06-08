@@ -2,9 +2,14 @@ package com.sistemaifes.sistemaifes.service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.sistemaifes.sistemaifes.exception.InvalidLengthException;
 import com.sistemaifes.sistemaifes.exception.ItemAlreadyRegisteredException;
+import com.sistemaifes.sistemaifes.model.Allocation;
+import com.sistemaifes.sistemaifes.model.Lesson;
+import com.sistemaifes.sistemaifes.repository.AllocationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -24,6 +29,9 @@ import jakarta.validation.constraints.Positive;
 public class LocalService {
     private final LocalRepository repository;
     private final EquipmentLocalRepository equipmentLocalRepository;
+
+    @Autowired
+    private AllocationRepository allocationRepository;
 
     public LocalService(LocalRepository repository, EquipmentLocalRepository equipmentLocalRepository){
         this.repository = repository;
@@ -111,6 +119,12 @@ public class LocalService {
     public List<Local> getAllUnallocatedLocationst() {
         return repository.findAllUnallocatedLocations().stream().toList();
 
+    }
+
+    public List<Object> getRecordsAllocation(Long courseId) {
+        List<Allocation> lessons = allocationRepository.findByLocalId(courseId);
+
+        return lessons.stream().collect(Collectors.toList());
     }
 
 

@@ -28,8 +28,6 @@ public class Teacher extends User {
     @Column(nullable = false)
     private String teacherCode;
 
-    @Column(nullable = false)
-    private String specialty;
 
     @Column(nullable = false)
     private String educationLevel;
@@ -51,7 +49,6 @@ public class Teacher extends User {
     public Teacher(TeacherRequestDTO data) { 
        this.setName(data.name());
        this.teacherCode = data.teacherCode();
-       this.specialty = data.specialty();
        this.educationLevel = data.educationLevel();
        this.situation = data.situation();
        this.coordinator = data.coordinator();

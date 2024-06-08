@@ -1,7 +1,11 @@
 package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.sistemaifes.sistemaifes.model.Lesson;
+import com.sistemaifes.sistemaifes.repository.LessonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -19,6 +23,10 @@ import jakarta.validation.constraints.Positive;
 @Service
 public class TeacherService {
     private final TeacherRepository repository;
+
+    @Autowired
+    private LessonRepository lessonRepository;
+
     public TeacherService(TeacherRepository repository){
         this.repository = repository;
     }
@@ -47,7 +55,6 @@ public class TeacherService {
                     recordFound.setName(teacher.getName());
                     recordFound.setTeacherCode(teacher.getTeacherCode());
                     recordFound.setCoordinator(teacher.isCoordinator());
-                    recordFound.setSpecialty(teacher.getSpecialty());
                     recordFound.setEducationLevel(teacher.getEducationLevel());
                     recordFound.setSituation(teacher.isSituation());
                     recordFound.setCoordination(teacher.getCoordination());
@@ -58,5 +65,11 @@ public class TeacherService {
     public void delete(@PathVariable @NotNull Long id){
         repository.delete(repository.findById(id)
             .orElseThrow(() -> new RecordNotFoundException(id)));
+    }
+
+    public List<Object> getRecordsTeacher(Long studentId) {
+        List<Lesson> lessons = lessonRepository.findByTeacherId(studentId);
+
+        return lessons.stream().collect(Collectors.toList());
     }
 }
