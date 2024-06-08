@@ -1,5 +1,6 @@
 package com.sistemaifes.sistemaifes.repository;
 
+import com.sistemaifes.sistemaifes.model.Discipline;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -41,6 +42,8 @@ public interface LessonRepository extends JpaRepository<Lesson, Long>{
             @Param("semesterId") Long semesterId
     );
 
+    @Query("SELECT l FROM Lesson l WHERE l.semester._id = :semesterId")
+    List<Lesson> findBySemesterId(Long semesterId);
     @Transactional
     @Modifying
     @Query(value = """ 

@@ -56,6 +56,10 @@ public class CourseController {
         return courseService.update(id, course);
     }
 
+    @GetMapping("/{id}/records")
+    public List<Object> getCourseRecords(@PathVariable @NotNull @Positive Long id) {
+        return courseService.getRecordsCourse(id);
+    }
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){

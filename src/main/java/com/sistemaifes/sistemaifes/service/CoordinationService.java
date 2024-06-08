@@ -1,9 +1,16 @@
 package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.sistemaifes.sistemaifes.exception.InvalidLengthException;
 import com.sistemaifes.sistemaifes.exception.ItemAlreadyRegisteredException;
+import com.sistemaifes.sistemaifes.model.Coordinator;
+import com.sistemaifes.sistemaifes.model.Teacher;
+import com.sistemaifes.sistemaifes.repository.CoordinatorRepository;
+import com.sistemaifes.sistemaifes.repository.TeacherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
  
@@ -21,11 +28,17 @@ import jakarta.validation.constraints.Positive;
 public class CoordinationService {
     private CoordinationRepository repository;
 
+    @Autowired
+    private CoordinatorRepository coordinatorRepository;
+
+    @Autowired
+    private TeacherRepository teacherRepository;
+
     public CoordinationService(CoordinationRepository repository){
         this.repository = repository;
     }
 
-        public List<CoordinationResponseDTO> getAll() {
+    public List<CoordinationResponseDTO> getAll() {
         return repository.findAll().stream().map((CoordinationResponseDTO::new)).toList();
     }
 
@@ -72,6 +85,14 @@ public class CoordinationService {
     public void delete(@PathVariable @NotNull Long id){
         repository.delete(repository.findById(id)
             .orElseThrow(() -> new RecordNotFoundException(id)));
+    }
+
+    public List<Object> getRecordsCoordination(Long coordinationId) {
+        List<Coordinator> coodinators = coordinatorRepository.findByCoordinationId(coordinationId);
+        List<Teacher> teachers = teacherRepository.findByCoordinationId(coordinationId);
+
+        return Stream.concat(coodinators.stream(), teachers.stream())
+                .collect(Collectors.toList());
     }
  
 }

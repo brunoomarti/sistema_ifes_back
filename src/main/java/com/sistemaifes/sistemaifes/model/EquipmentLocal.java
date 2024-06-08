@@ -30,7 +30,7 @@ public class EquipmentLocal {
     private Long _id;
 
     @ManyToOne
-    @JoinColumn(name = "id_equipmento")
+    @JoinColumn(name = "id_equipment")
     private Equipment equipment;
     
     @ManyToOne(cascade = CascadeType.ALL)

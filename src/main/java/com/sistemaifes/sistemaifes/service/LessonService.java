@@ -1,18 +1,19 @@
 package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.sistemaifes.sistemaifes.dto.response.StudentLessonScheduleResponseDTO;
-import com.sistemaifes.sistemaifes.model.StudentLessonSchedule;
+import com.sistemaifes.sistemaifes.model.*;
 import com.sistemaifes.sistemaifes.repository.StudentLessonScheduleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.sistemaifes.sistemaifes.dto.request.LessonRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.LessonResponseDTO;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
-import com.sistemaifes.sistemaifes.model.Lesson;
-import com.sistemaifes.sistemaifes.model.Student;
 import com.sistemaifes.sistemaifes.repository.LessonRepository;
 import com.sistemaifes.sistemaifes.repository.StudentRepository;
 
@@ -25,6 +26,9 @@ public class LessonService {
     private final LessonRepository repository;
     private final StudentRepository studentRepository;
     private final StudentLessonScheduleRepository studentLessonShedule;
+
+    @Autowired
+    private LessonRepository lessonRepository;
 
     public LessonService(LessonRepository repository,
                          StudentRepository studentRepository,
@@ -65,7 +69,6 @@ public class LessonService {
         repository.delete(repository.findById(id)
             .orElseThrow(() -> new RecordNotFoundException(id)));
     }
-
     public void removeStudentFromLesson(Long studentId, Long lessonId) {
         Student student =  studentRepository.findById(studentId)
                                     .orElseThrow(() -> new RecordNotFoundException(studentId));
