@@ -51,14 +51,14 @@ public class CourseService {
             throw new InvalidLengthException("O nome do curso deve ter no máximo 100 caracteres e no minimo 3 caracteres");
         }
 
-        if (verifyIfEquipmentExist(data.name())){
+        if (verifyIfCourseExist(data.name())){
             throw new ItemAlreadyRegisteredException(data.name());
         }
 
         return repository.save(cordData);
     }
 
-    public boolean verifyIfEquipmentExist(String equipmentName) {
+    public boolean verifyIfCourseExist(String equipmentName) {
         return repository.existsByNameIgnoreCase(equipmentName);
     }
  
@@ -66,7 +66,7 @@ public class CourseService {
     public Course update(@NotNull @Positive Long id, @Valid Course course){
         return repository.findById(id)
                 .map(recordFound -> {
-                    recordFound.setName(course.getName()); 
+                    recordFound.setName(course.getName());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
