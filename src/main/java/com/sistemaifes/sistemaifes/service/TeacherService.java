@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.sistemaifes.sistemaifes.dto.request.TeacherRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.TeacherResponseDTO;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
-import com.sistemaifes.sistemaifes.model.Student;
 import com.sistemaifes.sistemaifes.model.Teacher;
 import com.sistemaifes.sistemaifes.repository.TeacherRepository;
 
@@ -57,6 +56,7 @@ public class TeacherService {
                     recordFound.setCoordinator(teacher.isCoordinator());
                     recordFound.setEducationLevel(teacher.getEducationLevel());
                     recordFound.setSituation(teacher.isSituation());
+                    recordFound.setCoordinator(teacher.isCoordinator());
                     recordFound.setCoordination(teacher.getCoordination());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));

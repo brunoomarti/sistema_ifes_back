@@ -59,6 +59,7 @@ public class DisciplineService {
                 .map(recordFound -> {
                     recordFound.setName(discipline.getName());
                     recordFound.setAcronym(discipline.getAcronym());
+                    recordFound.setCourse(discipline.getCourse());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }

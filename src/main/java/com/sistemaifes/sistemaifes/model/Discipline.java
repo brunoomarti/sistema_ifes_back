@@ -29,7 +29,7 @@ public class Discipline {
     private String name;
 
     @Column(length = 10)
-    @Length(min = 3, max = 10)
+    @Length(min = 2, max = 10)
     private String acronym;
 
     @OneToMany(mappedBy = "discipline") 

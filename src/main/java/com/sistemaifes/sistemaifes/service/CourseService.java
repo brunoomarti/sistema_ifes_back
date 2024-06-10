@@ -66,7 +66,8 @@ public class CourseService {
     public Course update(@NotNull @Positive Long id, @Valid Course course){
         return repository.findById(id)
                 .map(recordFound -> {
-                    recordFound.setName(course.getName());
+                    recordFound.setName(course.getName()); 
+                    recordFound.setIdentityNumber(course.getIdentityNumber());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }

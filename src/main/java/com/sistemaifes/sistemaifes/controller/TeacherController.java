@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sistemaifes.sistemaifes.dto.request.TeacherRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.TeacherResponseDTO;
-import com.sistemaifes.sistemaifes.model.Student;
 import com.sistemaifes.sistemaifes.model.Teacher;
 import com.sistemaifes.sistemaifes.service.TeacherService;
 

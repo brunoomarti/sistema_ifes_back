@@ -30,6 +30,11 @@ public class Course {
     @Length(min = 3, max = 100)
     private String name;
 
+    @NotNull
+    @Column
+    @Length(min = 4, max = 4)
+    private String identityNumber;
+
     @OneToMany(mappedBy = "course") 
     @JsonIgnore
     private List<Discipline> disciplines;
@@ -40,5 +45,6 @@ public class Course {
 
      public Course(CourseRequestDTO data) {
         this.name = data.name();
+        this.identityNumber = data.identityNumber();
     }
 }
