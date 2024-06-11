@@ -5,6 +5,7 @@ import com.sistemaifes.sistemaifes.model.Course;
 public record StudentRequestDTO(
     String name,
     String studentCode,
+    String registrationYear,
     Course course
     ) {
     

@@ -58,6 +58,7 @@ public class StudentService {
                 .map(recordFound -> {
                     recordFound.setName(student.getName());
                     recordFound.setStudentCode(student.getStudentCode());
+                    recordFound.setRegistrationYear(student.getRegistrationYear());
                     recordFound.setCourse(student.getCourse());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));

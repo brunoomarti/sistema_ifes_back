@@ -28,7 +28,6 @@ public class Teacher extends User {
     @Column(nullable = false)
     private String teacherCode;
 
-
     @Column(nullable = false)
     private String educationLevel;
 

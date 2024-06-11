@@ -20,6 +20,9 @@ public class Student extends User {
 
     @Column(nullable = false)
     private String studentCode;
+
+    @Column(nullable = false)
+    private String registrationYear;
     
     @ManyToMany(cascade = CascadeType.REMOVE)
     private List<Lesson> lessons;
@@ -31,6 +34,7 @@ public class Student extends User {
     public Student(StudentRequestDTO data) {
         this.setName(data.name());
         this.studentCode = data.studentCode();
+        this.registrationYear = data.registrationYear();
         this.course = data.course();
     }
 }
