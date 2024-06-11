@@ -42,11 +42,6 @@ public class DisciplineService {
 
     public Discipline saveDiscipline(DisciplineRequestDTO data){
         Discipline eqData = new Discipline(data);
-
-        if (verifyIfEquipmentExist(data.name())){
-            throw new ItemAlreadyRegisteredException(data.name());
-        }
-        
         return repository.save(eqData);
     }
 
