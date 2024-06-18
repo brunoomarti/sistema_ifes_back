@@ -2,6 +2,8 @@ package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
 
+import com.sistemaifes.sistemaifes.exception.InvalidLengthException;
+import com.sistemaifes.sistemaifes.exception.ItemAlreadyRegisteredException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
  
@@ -34,9 +36,22 @@ public class UserService {
     public User saveUser(UserRequestDTO data){
         User dataUser = new User(data);
         dataUser.setEstahAtivo(true);
+
+        if (dataUser.getName().length() > 100 || dataUser.getName().length() < 3) {
+            throw new InvalidLengthException("O nome do usuário deve ter no máximo 100 caracteres e no minimo 3 caracteres");
+        }
+
+        if (verifyIUserExist(data.name())){
+            throw new ItemAlreadyRegisteredException(data.name());
+        }
+
         return repository.save(dataUser);
     }
-    
+
+    public boolean verifyIUserExist(String equipmentName) {
+        return repository.existsByNameIgnoreCase(equipmentName);
+    }
+
     public User update(@NotNull @Positive Long id, @Valid User user){
         return repository.findById(id)
                 .map(recordFound -> {

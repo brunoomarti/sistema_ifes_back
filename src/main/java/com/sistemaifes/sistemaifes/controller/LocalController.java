@@ -49,6 +49,12 @@ public class LocalController {
         localService.delete(id);
     }
 
+
+    @GetMapping("/{id}/records")
+    public List<Object> getAllocationRecords(@PathVariable @NotNull @Positive Long id) {
+        return localService.getRecordsAllocation(id);
+    }
+
     @GetMapping("/availableLocal")
     public @ResponseBody List<Local> getAllClientsActiveAndDebit() {
         return localService.getAllUnallocatedLocationst();

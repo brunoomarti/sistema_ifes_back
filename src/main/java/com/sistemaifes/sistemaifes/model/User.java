@@ -3,6 +3,7 @@ package com.sistemaifes.sistemaifes.model;
 import java.util.Collection;
 import java.util.List;
 
+import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,8 +31,8 @@ public class User implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long _id;
  
-    @Length(min = 3, max = 100)
     @Column(length = 100, nullable = false)
+    @Length(min = 3, max = 100)
     private String name;
 
     @Column(nullable = false)

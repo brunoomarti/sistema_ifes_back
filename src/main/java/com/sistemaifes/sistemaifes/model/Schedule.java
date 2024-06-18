@@ -22,10 +22,10 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long _id;
 
-    @Column(length = 100, nullable = false)
+    @Column
     private String startTime;
 
-    @Column(length = 100, nullable = false)
+    @Column
     private String endTime;
 
     @ManyToMany

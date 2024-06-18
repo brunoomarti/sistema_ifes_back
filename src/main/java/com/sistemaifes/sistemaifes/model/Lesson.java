@@ -17,6 +17,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,7 +46,8 @@ public class Lesson {
     @JoinColumn(name = "id_teacher")
     private Teacher teacher;
 
-    @Column(nullable = false)
+    @Column
+    @Positive
     private Integer weeklyQuantity;
 
     @OneToMany(mappedBy = "lesson", cascade = CascadeType.REMOVE)

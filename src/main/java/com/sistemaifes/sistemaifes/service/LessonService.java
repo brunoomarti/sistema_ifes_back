@@ -1,15 +1,19 @@
 package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import com.sistemaifes.sistemaifes.dto.response.StudentLessonScheduleResponseDTO;
+import com.sistemaifes.sistemaifes.model.*;
+import com.sistemaifes.sistemaifes.repository.StudentLessonScheduleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.sistemaifes.sistemaifes.dto.request.LessonRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.LessonResponseDTO;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
-import com.sistemaifes.sistemaifes.model.Lesson;
-import com.sistemaifes.sistemaifes.model.Student;
 import com.sistemaifes.sistemaifes.repository.LessonRepository;
 import com.sistemaifes.sistemaifes.repository.StudentRepository;
 
@@ -21,10 +25,18 @@ import jakarta.validation.constraints.Positive;
 public class LessonService {
     private final LessonRepository repository;
     private final StudentRepository studentRepository;
+    private final StudentLessonScheduleRepository studentLessonShedule;
 
-    public LessonService(LessonRepository repository, StudentRepository studentRepository){
+    @Autowired
+    private LessonRepository lessonRepository;
+
+    public LessonService(LessonRepository repository,
+                         StudentRepository studentRepository,
+                         StudentLessonScheduleRepository studentLessonShedule
+    ){
         this.repository = repository;
         this.studentRepository = studentRepository;
+        this.studentLessonShedule = studentLessonShedule;
     }
 
     public List<LessonResponseDTO> getAll() {
@@ -54,6 +66,7 @@ public class LessonService {
     }
 
     public void delete(@PathVariable @NotNull Long id){
+        removeAllStudentFromLesson(id);
         repository.delete(repository.findById(id)
             .orElseThrow(() -> new RecordNotFoundException(id)));
     }
@@ -67,5 +80,23 @@ public class LessonService {
         
         repository.removeStudentFromLesson(studentId, lessonId);
         
+    }
+
+    public void removeAllStudentFromLesson(Long lessonId){
+        repository.removeAllStudentFromLesson(lessonId);
+    }
+
+    public List<LessonResponseDTO> findLessonsByStudentCodeAndSemesterId(String studentCode, Long semesterId) {
+        return repository.findLessonsByStudentCodeAndSemesterId(studentCode , semesterId)
+                .stream().map((LessonResponseDTO::new)).toList();
+    }
+
+    public StudentLessonSchedule findNextLessonByStudentCode(String studentCode) {
+        return studentLessonShedule.findNextLessonByStudentCode(studentCode);
+    }
+
+    public List<LessonResponseDTO> findLessonsByTeacherCodeAndSemesterId(String teacherCode, Long semesterId) {
+        return repository.findLessonsByTeacherCodeAndSemesterId(teacherCode , semesterId)
+                .stream().map((LessonResponseDTO::new)).toList();
     }
 }

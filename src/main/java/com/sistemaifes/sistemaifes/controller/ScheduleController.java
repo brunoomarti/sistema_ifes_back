@@ -52,6 +52,11 @@ public class ScheduleController {
         return scheduleService.update(id, schedule);
     }
 
+    @GetMapping("/{id}/records")
+    public List<Object> getAllocationRecords(@PathVariable @NotNull @Positive Long id) {
+        return scheduleService.getRecordsAllocation(id);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){

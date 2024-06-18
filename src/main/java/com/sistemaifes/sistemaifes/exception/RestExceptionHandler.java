@@ -20,4 +20,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler{
         RestErrorMessage threatResponse = new RestErrorMessage(HttpStatus.FOUND, ex.getMessage());
         return ResponseEntity.status(HttpStatus.FOUND).body(threatResponse);
     }
+
+    @ExceptionHandler(InvalidLengthException.class)
+    public ResponseEntity<RestErrorMessage> handleInvalidLengthExceptionException(InvalidLengthException ex) {
+        RestErrorMessage threatResponse = new RestErrorMessage(HttpStatus.NOT_ACCEPTABLE, ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(threatResponse);
+    }
 }

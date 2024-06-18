@@ -16,6 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sistemaifes.sistemaifes.dto.request.CourseRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.CourseResponseDTO;
+
+import com.sistemaifes.sistemaifes.dto.request.AllocationRequestDTO;
+import com.sistemaifes.sistemaifes.dto.request.CourseRequestDTO;
+import com.sistemaifes.sistemaifes.dto.response.AllocationResponseDTO;
+import com.sistemaifes.sistemaifes.dto.response.CourseResponseDTO;
+import com.sistemaifes.sistemaifes.model.Allocation;
+
 import com.sistemaifes.sistemaifes.model.Course;
 import com.sistemaifes.sistemaifes.service.CourseService;
 
@@ -48,10 +55,17 @@ public class CourseController {
     }
 
     @PutMapping("/{id}")
+
     public Course update(@PathVariable @NotNull @Positive Long id, @RequestBody Course course){
         return courseService.update(id, course);
     }
 
+
+    @GetMapping("/{id}/records")
+    public List<Object> getCourseRecords(@PathVariable @NotNull @Positive Long id) {
+        return courseService.getRecordsCourse(id);
+    }
+  
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){

@@ -5,17 +5,13 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.EventRequestDTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "event")
@@ -28,19 +24,22 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long _id;
 
-    @Column
+    @Column(length = 100)
+    @Length(min = 3, max = 10)
     private String name;
 
-    @Column
+    @Column(length = 100)
+    @Length(min = 3, max = 100)
     private String applicant;
 
     @Column
+    @Length(min = 3, max = 200)
     private String description;
 
     @Column
     private boolean allocated;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Allocation> allocations;
 

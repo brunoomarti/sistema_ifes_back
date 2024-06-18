@@ -7,5 +7,5 @@ import com.sistemaifes.sistemaifes.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
     UserDetails findByLogin(String login);
-
+    boolean existsByNameIgnoreCase(String name);
 }

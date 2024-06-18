@@ -1,7 +1,11 @@
 package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.sistemaifes.sistemaifes.model.Lesson;
+import com.sistemaifes.sistemaifes.repository.LessonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
  
@@ -18,6 +22,9 @@ import jakarta.validation.constraints.Positive;
 @Service
 public class SemesterService {
     private final SemesterRepository repository;
+
+    @Autowired
+    private LessonRepository lessonRepository;
 
     public SemesterService(SemesterRepository repository){
         this.repository = repository;
@@ -51,5 +58,11 @@ public class SemesterService {
     public void delete(@PathVariable @NotNull Long id){
         repository.delete(repository.findById(id)
             .orElseThrow(() -> new RecordNotFoundException(id)));
+    }
+
+    public List<Object> getRecordsLesson(Long courseId) {
+        List<Lesson> lessons = lessonRepository.findBySemesterId(courseId);
+
+        return lessons.stream().collect(Collectors.toList());
     }
 }

@@ -52,6 +52,11 @@ public class DisciplineController {
         return disciplineService.update(id, discipline);
     }
 
+    @GetMapping("/{id}/records")
+    public List<Object> getRecordsDiscipline(@PathVariable @NotNull @Positive Long id) {
+        return disciplineService.getRecordsDiscipline(id);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){

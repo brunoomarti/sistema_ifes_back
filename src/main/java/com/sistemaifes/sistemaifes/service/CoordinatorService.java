@@ -2,6 +2,7 @@ package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
 
+import com.sistemaifes.sistemaifes.exception.InvalidLengthException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -35,10 +36,6 @@ public class CoordinatorService {
     public Coordinator saveCoordinator(CoordinatorRequestDTO data){
         Coordinator cordData = new Coordinator(data);
         cordData.setEstahAtivo(true);
-        
-        if (verifyIfCoordinatorExist(data.name())){
-            throw new ItemAlreadyRegisteredException(data.name());
-        }
 
         return repository.save(cordData);
     }
@@ -64,4 +61,5 @@ public class CoordinatorService {
     public List<Coordinator> findCoordinatorByName(String name) {
         return repository.findByNameContainingIgnoreCase(name);
     }
+
 }

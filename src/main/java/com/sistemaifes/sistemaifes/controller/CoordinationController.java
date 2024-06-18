@@ -52,9 +52,16 @@ public class CoordinationController {
         return coordinationService.update(id, coordination);
     }
 
+    @GetMapping("/{id}/records")
+    public List<Object> getCoordinationRecords(@PathVariable @NotNull @Positive Long id) {
+        return coordinationService.getRecordsCoordination(id);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){
         coordinationService.delete(id);
     }
+
+
 }

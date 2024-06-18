@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,7 @@ public class EquipmentLocal {
     private Long _id;
 
     @ManyToOne
-    @JoinColumn(name = "id_equipmento")
+    @JoinColumn(name = "id_equipment")
     private Equipment equipment;
     
     @ManyToOne(cascade = CascadeType.ALL)
@@ -38,6 +39,7 @@ public class EquipmentLocal {
     private Local location;
     
     @Column
+    @Positive
     private Integer quantity;
 
     public EquipmentLocal(EquipmentLocalRequestDTO data){

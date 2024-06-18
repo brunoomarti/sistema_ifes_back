@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,9 +27,6 @@ public class Teacher extends User {
     
     @Column(nullable = false)
     private String teacherCode;
-
-    @Column(nullable = false)
-    private String specialty;
 
     @Column(nullable = false)
     private String educationLevel;
@@ -50,7 +48,6 @@ public class Teacher extends User {
     public Teacher(TeacherRequestDTO data) { 
        this.setName(data.name());
        this.teacherCode = data.teacherCode();
-       this.specialty = data.specialty();
        this.educationLevel = data.educationLevel();
        this.situation = data.situation();
        this.coordinator = data.coordinator();

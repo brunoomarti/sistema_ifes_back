@@ -1,7 +1,12 @@
 package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.sistemaifes.sistemaifes.model.Allocation;
+import com.sistemaifes.sistemaifes.model.Lesson;
+import com.sistemaifes.sistemaifes.repository.LessonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -22,6 +27,9 @@ public class StudentService {
     private final StudentRepository repository;
     private final StudentScheduleRepository studentScheduleRepository;
 
+    @Autowired
+    private LessonRepository lessonRepository;
+
     public StudentService(StudentRepository repository, StudentScheduleRepository studentScheduleRepository){
         this.repository = repository;
         this.studentScheduleRepository = studentScheduleRepository;
@@ -35,6 +43,10 @@ public class StudentService {
         return repository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
+    public Student idByCode(@PathVariable @NotNull @Positive String studentCode){
+        return repository.idByCode(studentCode);
+    }
+
     public Student saveStudent(StudentRequestDTO data){
         Student dataStudent = new Student(data);
         dataStudent.setEstahAtivo(true);
@@ -46,6 +58,8 @@ public class StudentService {
                 .map(recordFound -> {
                     recordFound.setName(student.getName());
                     recordFound.setStudentCode(student.getStudentCode());
+                    recordFound.setRegistrationYear(student.getRegistrationYear());
+                    recordFound.setCourse(student.getCourse());
                     return repository.save(recordFound);
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
@@ -58,5 +72,11 @@ public class StudentService {
     public List<StudentSchedule> getStudentSchedule(String studentCode){
         Student s = repository.findByStudentCode(studentCode);
         return studentScheduleRepository.getStudentSchedule(s.get_id());
+    }
+
+    public List<Object> getRecordsStudent(Long studentId) {
+        List<Lesson> lessons = lessonRepository.findByStudentId(studentId);
+
+        return lessons.stream().collect(Collectors.toList());
     }
 }

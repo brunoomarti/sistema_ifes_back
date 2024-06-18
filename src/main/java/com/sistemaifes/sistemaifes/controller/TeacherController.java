@@ -47,9 +47,19 @@ public class TeacherController {
         return teacherService.findById(id);
     }
 
+    @GetMapping("/idByCode/{teacherCode}")
+    public Teacher idByCode(@PathVariable @NotNull @Positive String teacherCode){
+        return teacherService.idByCode(teacherCode);
+    }
+
     @PutMapping("/{id}")
     public Teacher update(@PathVariable @NotNull @Positive Long id, @RequestBody Teacher teacher){
         return teacherService.update(id, teacher);
+    }
+
+    @GetMapping("/{id}/records")
+    public List<Object> getRecordsStudent(@PathVariable @NotNull @Positive Long id) {
+        return teacherService.getRecordsTeacher(id);
     }
 
     @DeleteMapping("/{id}")

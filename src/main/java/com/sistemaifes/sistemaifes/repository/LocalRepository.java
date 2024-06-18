@@ -10,4 +10,7 @@ import com.sistemaifes.sistemaifes.model.Local;
 public interface LocalRepository extends JpaRepository<Local, Long> {
     @Query("SELECT l FROM Local l WHERE l.allocated = false")
     List<Local> findAllUnallocatedLocations();
+
+    boolean existsByNameIgnoreCase(String name);
+
 }
