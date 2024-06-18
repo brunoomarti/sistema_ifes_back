@@ -36,7 +36,7 @@ public class ScheduleController {
         return scheduleService.getAll();
     }
     
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Schedule saveSchedule(@RequestBody ScheduleRequestDTO data){ 
         return scheduleService.saveSchedule(data);
@@ -47,7 +47,7 @@ public class ScheduleController {
         return scheduleService.findById(id);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Schedule update(@PathVariable @NotNull @Positive Long id, @RequestBody Schedule schedule){
         return scheduleService.update(id, schedule);
     }

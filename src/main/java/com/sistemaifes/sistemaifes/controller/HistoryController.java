@@ -37,7 +37,7 @@ public class HistoryController {
         return historyService.getAll();
     }
 
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public History saveHistory(@RequestBody HistoryRequestDTO data){
         return historyService.saveHistory(data);
@@ -48,7 +48,7 @@ public class HistoryController {
         return historyService.findById(id);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public History update(@PathVariable @NotNull @Positive Long id, @RequestBody History history){
         return historyService.update(id, history);
     }

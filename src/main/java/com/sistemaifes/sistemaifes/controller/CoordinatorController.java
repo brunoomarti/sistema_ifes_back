@@ -36,7 +36,7 @@ public class CoordinatorController {
         return coordinatorService.getAll();
     }
 
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Coordinator saveCoordinator(@RequestBody CoordinatorRequestDTO data){
         return coordinatorService.saveCoordinator(data);
@@ -52,7 +52,7 @@ public class CoordinatorController {
         return coordinatorService.findCoordinatorByName(name);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Coordinator update(@PathVariable @NotNull @Positive Long id, @RequestBody Coordinator coordinator){
         return coordinatorService.update(id, coordinator);
     }

@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sistemaifes.sistemaifes.dto.request.CourseRequestDTO;
+import com.sistemaifes.sistemaifes.dto.response.CourseResponseDTO;
+
 import com.sistemaifes.sistemaifes.dto.request.AllocationRequestDTO;
 import com.sistemaifes.sistemaifes.dto.request.CourseRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.AllocationResponseDTO;
 import com.sistemaifes.sistemaifes.dto.response.CourseResponseDTO;
 import com.sistemaifes.sistemaifes.model.Allocation;
+
 import com.sistemaifes.sistemaifes.model.Course;
 import com.sistemaifes.sistemaifes.service.CourseService;
 
@@ -28,7 +32,6 @@ import jakarta.validation.constraints.Positive;
 @RestController
 @RequestMapping("api/course")
 public class CourseController {
-
     private CourseService courseService;
 
     public CourseController(CourseService courseService){
@@ -39,8 +42,8 @@ public class CourseController {
     public @ResponseBody List<CourseResponseDTO> getAll(){
         return courseService.getAll();
     }
-
-    @PostMapping("/new")
+    
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Course saveCourse(@RequestBody CourseRequestDTO data){
         return courseService.saveCourse(data);
@@ -51,19 +54,21 @@ public class CourseController {
         return courseService.findById(id);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
+
     public Course update(@PathVariable @NotNull @Positive Long id, @RequestBody Course course){
         return courseService.update(id, course);
     }
+
 
     @GetMapping("/{id}/records")
     public List<Object> getCourseRecords(@PathVariable @NotNull @Positive Long id) {
         return courseService.getRecordsCourse(id);
     }
+  
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @NotNull @Positive Long id){
         courseService.delete(id);
     }
-    
 }

@@ -36,7 +36,7 @@ public class TeacherController {
         return teacherService.getAll();
     }
     
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Teacher saveTeacher(@RequestBody TeacherRequestDTO data){ 
         return teacherService.saveTeacher(data);
@@ -52,7 +52,7 @@ public class TeacherController {
         return teacherService.idByCode(teacherCode);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Teacher update(@PathVariable @NotNull @Positive Long id, @RequestBody Teacher teacher){
         return teacherService.update(id, teacher);
     }

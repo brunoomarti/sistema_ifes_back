@@ -37,7 +37,7 @@ public class StudentController {
         return studentService.getAll();
     }
     
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Student saveStudent(@RequestBody StudentRequestDTO data){
         System.out.println("\n\n\n" + data + "\n\n\n");
@@ -54,7 +54,7 @@ public class StudentController {
         return studentService.idByCode(studentCode);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Student update(@PathVariable @NotNull @Positive Long id, @RequestBody Student student){
         return studentService.update(id, student);
     }

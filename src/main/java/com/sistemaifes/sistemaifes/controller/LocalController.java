@@ -27,7 +27,7 @@ public class LocalController {
         return localService.getAll();
     }
     
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Local saveLocal(@RequestBody LocalRequestDTO data){ 
         return localService.saveLocal(data);
@@ -38,7 +38,7 @@ public class LocalController {
         return localService.findById(id);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Local update(@PathVariable @NotNull @Positive Long id, @RequestBody Local local){
         return localService.update(id, local);
     }

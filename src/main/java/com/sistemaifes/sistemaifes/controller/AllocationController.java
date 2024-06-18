@@ -37,7 +37,7 @@ public class AllocationController {
         return allocationService.getAll();
     }
 
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Allocation saveAllocation(@RequestBody AllocationRequestDTO data){
         return allocationService.saveAllocation(data);
@@ -48,7 +48,7 @@ public class AllocationController {
         return allocationService.findById(id);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Allocation update(@PathVariable @NotNull @Positive Long id, @RequestBody Allocation allocation){
         return allocationService.update(id, allocation);
     }

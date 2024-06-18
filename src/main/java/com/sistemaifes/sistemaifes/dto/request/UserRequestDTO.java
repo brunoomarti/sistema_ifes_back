@@ -1,9 +1,12 @@
 package com.sistemaifes.sistemaifes.dto.request;
 
+import com.sistemaifes.sistemaifes.util.UserRole;
+
 public record UserRequestDTO(
-    Long _id,
     String name,
-    boolean estahAtivo
+    String login,
+    String password,
+    UserRole role
 ) {
     
 }

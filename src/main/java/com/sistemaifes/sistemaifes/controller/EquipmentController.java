@@ -36,7 +36,7 @@ public class EquipmentController {
         return equipmentService.getAll();
     }
     
-    @PostMapping("/new")
+    @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Equipment saveEquipment(@RequestBody EquipmentRequestDTO data){
         return equipmentService.saveEquipment(data);
@@ -52,7 +52,7 @@ public class EquipmentController {
         return equipmentService.findEquipmentByName(name);
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}")
     public Equipment update(@PathVariable @NotNull @Positive Long id, @RequestBody Equipment equipment){
         return equipmentService.update(id, equipment);
     }
