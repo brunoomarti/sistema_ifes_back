@@ -2,8 +2,10 @@ package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
 
+import com.sistemaifes.sistemaifes.controller.AuthenticationController;
 import com.sistemaifes.sistemaifes.exception.InvalidLengthException;
 import com.sistemaifes.sistemaifes.exception.ItemAlreadyRegisteredException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
  
@@ -20,6 +22,9 @@ import jakarta.validation.constraints.Positive;
 @Service
 public class UserService {
     private final UserRepository repository;
+
+    @Autowired
+    private AuthenticationController authenticationController;
 
     public UserService(UserRepository repository){
         this.repository = repository;

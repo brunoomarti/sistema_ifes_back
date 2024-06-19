@@ -3,18 +3,21 @@ package com.sistemaifes.sistemaifes.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.sistemaifes.sistemaifes.model.Allocation;
-import com.sistemaifes.sistemaifes.model.Lesson;
+import com.sistemaifes.sistemaifes.controller.AuthenticationController;
+import com.sistemaifes.sistemaifes.dto.request.UserRequestDTO;
+import com.sistemaifes.sistemaifes.model.*;
 import com.sistemaifes.sistemaifes.repository.LessonRepository;
+import com.sistemaifes.sistemaifes.repository.UserRepository;
+import com.sistemaifes.sistemaifes.util.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.sistemaifes.sistemaifes.dto.request.StudentRequestDTO;
 import com.sistemaifes.sistemaifes.dto.response.StudentResponseDTO;
 import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
-import com.sistemaifes.sistemaifes.model.Student;
-import com.sistemaifes.sistemaifes.model.StudentSchedule;
 import com.sistemaifes.sistemaifes.repository.StudentRepository;
 import com.sistemaifes.sistemaifes.repository.StudentScheduleRepository;
 
@@ -29,6 +32,12 @@ public class StudentService {
 
     @Autowired
     private LessonRepository lessonRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private AuthenticationController authenticationController;
 
     public StudentService(StudentRepository repository, StudentScheduleRepository studentScheduleRepository){
         this.repository = repository;
@@ -50,7 +59,32 @@ public class StudentService {
     public Student saveStudent(StudentRequestDTO data){
         Student dataStudent = new Student(data);
         dataStudent.setEstahAtivo(true);
-        return repository.save(dataStudent);
+
+        dataStudent.setLogin(data.studentCode());
+        dataStudent.setPassword("123456!");
+        dataStudent.setRole(UserRole.STUDENT);
+
+        registerStudent(dataStudent);
+
+        return dataStudent;
+    }
+
+    public ResponseEntity registerStudent(Student s){
+
+        if(this.userRepository.findByLogin(s.getLogin()) != null) return ResponseEntity.badRequest().build();
+
+        if (!authenticationController.validate(s.getPassword())) {
+            return ResponseEntity.badRequest().body("A senha deve conter pelo menos um caractere especial e seis caracteres alfanuméricos.");
+        }
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(s.getPassword());
+
+        s.setEstahAtivo(true);
+        s.setPassword(encryptedPassword);
+
+        this.repository.save(s);
+
+        return ResponseEntity.ok().build();
     }
     
     public Student update(@NotNull @Positive Long id, @Valid Student student){

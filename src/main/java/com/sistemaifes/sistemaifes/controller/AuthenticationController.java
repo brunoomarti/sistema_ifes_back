@@ -2,6 +2,7 @@ package com.sistemaifes.sistemaifes.controller;
 
 import com.sistemaifes.sistemaifes.dto.LoginResponseDTO;
 import com.sistemaifes.sistemaifes.infra.security.TokenService;
+import com.sistemaifes.sistemaifes.model.Coordinator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,13 +38,18 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
-        System.out.println("\n\n\n\n\nAQUI!!!" + data + "\n\n\n\n\n");
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
 
-        return ResponseEntity.ok(new LoginResponseDTO(data.login(), token));
+        var userFind = repository.findByUserCode(data.login());
+
+        if (userFind == null) {
+            return ResponseEntity.ok(new LoginResponseDTO(data.login(), token));
+        }
+
+        return ResponseEntity.ok(new LoginResponseDTO(userFind.getName(), token));
     }
 
     @PostMapping("/register")
@@ -57,6 +63,7 @@ public class AuthenticationController {
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data);
 
+        newUser.setEstahAtivo(true);
         newUser.setPassword(encryptedPassword);
 
         this.repository.save(newUser);
@@ -64,7 +71,7 @@ public class AuthenticationController {
         return ResponseEntity.ok().build();
     }
 
-    private boolean validate(String password) {
+    public boolean validate(String password) {
         Pattern pattern = Pattern.compile("^(?=.*[\\p{Punct}])(?=.*[\\w\\d]).{6,}$");
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();

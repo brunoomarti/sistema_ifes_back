@@ -2,7 +2,14 @@ package com.sistemaifes.sistemaifes.service;
 
 import java.util.List;
 
+import com.sistemaifes.sistemaifes.controller.AuthenticationController;
 import com.sistemaifes.sistemaifes.exception.InvalidLengthException;
+import com.sistemaifes.sistemaifes.model.Teacher;
+import com.sistemaifes.sistemaifes.repository.UserRepository;
+import com.sistemaifes.sistemaifes.util.UserRole;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,6 +28,12 @@ import jakarta.validation.constraints.Positive;
 public class CoordinatorService {
     private final CoordinatorRepository repository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private AuthenticationController authenticationController;
+
     public CoordinatorService(CoordinatorRepository repository){
         this.repository = repository;
     }
@@ -35,9 +48,36 @@ public class CoordinatorService {
 
     public Coordinator saveCoordinator(CoordinatorRequestDTO data){
         Coordinator cordData = new Coordinator(data);
-        cordData.setEstahAtivo(true);
 
-        return repository.save(cordData);
+        String fullName = cordData.getName().toLowerCase();
+        String firstName = fullName.split(" ")[0];
+
+        cordData.setLogin(firstName);
+        cordData.setPassword("123456!");
+        cordData.setEstahAtivo(true);
+        cordData.setRole(UserRole.COORDINATOR);
+
+        registerCoordinator(cordData);
+
+        return cordData;
+    }
+
+    public ResponseEntity registerCoordinator(Coordinator c){
+
+        if(this.userRepository.findByLogin(c.getLogin()) != null) return ResponseEntity.badRequest().build();
+
+        if (!authenticationController.validate(c.getPassword())) {
+            return ResponseEntity.badRequest().body("A senha deve conter pelo menos um caractere especial e seis caracteres alfanuméricos.");
+        }
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(c.getPassword());
+
+        c.setEstahAtivo(true);
+        c.setPassword(encryptedPassword);
+
+        this.repository.save(c);
+
+        return ResponseEntity.ok().build();
     }
 
     public boolean verifyIfCoordinatorExist(String equipmentName) {
