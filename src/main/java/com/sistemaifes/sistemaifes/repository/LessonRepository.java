@@ -43,8 +43,9 @@ public interface LessonRepository extends JpaRepository<Lesson, Long>{
             @Param("semesterId") Long semesterId
     );
 
-    @Query("SELECT l FROM Lesson l WHERE l.semester._id = :semesterId")
+    @Query( "SELECT l FROM Lesson l WHERE l.semester._id = :semesterId" )
     List<Lesson> findBySemesterId(Long semesterId);
+    
     @Transactional
     @Modifying
     @Query(value = """ 
