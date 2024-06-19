@@ -3,6 +3,7 @@ package com.sistemaifes.sistemaifes.controller;
 import com.sistemaifes.sistemaifes.dto.LoginResponseDTO;
 import com.sistemaifes.sistemaifes.infra.security.TokenService;
 import com.sistemaifes.sistemaifes.model.Coordinator;
+import com.sistemaifes.sistemaifes.util.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -43,13 +44,23 @@ public class AuthenticationController {
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
 
-        var userFind = repository.findByUserCode(data.login());
+        User userFind = null;
 
-        if (userFind == null) {
-            return ResponseEntity.ok(new LoginResponseDTO(data.login(), token));
+        var studentFind = repository.findByUserStudentCode(data.login());
+
+        var teacherFind = repository.findByUserTeacherCode(data.login());
+
+        if (studentFind == null){
+            userFind = teacherFind;
+        } else {
+            userFind = studentFind;
         }
 
-        return ResponseEntity.ok(new LoginResponseDTO(userFind.getName(), token));
+        if (userFind == null) {
+            return ResponseEntity.ok(new LoginResponseDTO(data.login(), token, UserRole.ADMIN.toString()));
+        }
+
+        return ResponseEntity.ok(new LoginResponseDTO(userFind.getName(), token, userFind.getRole().toString()));
     }
 
     @PostMapping("/register")
