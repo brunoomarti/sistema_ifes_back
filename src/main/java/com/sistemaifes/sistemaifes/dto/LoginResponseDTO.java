@@ -1,5 +1,7 @@
 package com.sistemaifes.sistemaifes.dto;
 
-public record LoginResponseDTO(String name, String token) {
+import com.sistemaifes.sistemaifes.util.UserRole;
+
+public record LoginResponseDTO(String name, String token, String role, String user_code) {
     
 }

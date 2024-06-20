@@ -11,6 +11,9 @@ public interface UserRepository extends JpaRepository<User, Long>{
     UserDetails findByLogin(String login);
     boolean existsByNameIgnoreCase(String name);
 
-    @Query("SELECT u FROM User u LEFT JOIN Student s ON u._id = s._id JOIN Teacher t ON u._id = t._id WHERE s.studentCode = :userCode OR t.teacherCode = :userCode")
-    User findByUserCode(@Param("userCode") String userCode);
+    @Query("SELECT u FROM User u JOIN Teacher t ON u._id = t._id WHERE t.teacherCode = :userCode")
+    User findByUserTeacherCode(@Param("userCode") String userCode);
+
+    @Query("SELECT u FROM User u JOIN Student s ON u._id = s._id WHERE s.studentCode = :userCode")
+    User findByUserStudentCode(@Param("userCode") String userCode);
 }
