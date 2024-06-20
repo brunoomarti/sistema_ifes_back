@@ -57,10 +57,12 @@ public class AuthenticationController {
         }
 
         if (userFind == null) {
-            return ResponseEntity.ok(new LoginResponseDTO(data.login(), token, UserRole.ADMIN.toString()));
+            return ResponseEntity.ok(new LoginResponseDTO(data.login(), token, UserRole.ADMIN.toString(), data.login()));
         }
 
-        return ResponseEntity.ok(new LoginResponseDTO(userFind.getName(), token, userFind.getRole().toString()));
+        return ResponseEntity.ok(
+                new LoginResponseDTO(userFind.getName(), token, userFind.getRole().toString(), userFind.getLogin())
+        );
     }
 
     @PostMapping("/register")
