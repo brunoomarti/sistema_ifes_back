@@ -33,6 +33,8 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
 
+                .requestMatchers(HttpMethod.POST, "/api/print-barcode").permitAll()
+
                  // Api Course
                 .requestMatchers(HttpMethod.POST, "/api/course/**").hasAnyRole("ADMIN", "COORDINATOR")
                 .requestMatchers(HttpMethod.PUT, "/api/course/**").hasAnyRole("ADMIN", "COORDINATOR")
