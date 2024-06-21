@@ -2,7 +2,6 @@ package com.sistemaifes.sistemaifes.controller;
 
 import com.sistemaifes.sistemaifes.dto.LoginResponseDTO;
 import com.sistemaifes.sistemaifes.infra.security.TokenService;
-import com.sistemaifes.sistemaifes.model.Coordinator;
 import com.sistemaifes.sistemaifes.util.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,17 +27,19 @@ import java.util.regex.Pattern;
 @RequestMapping("api/auth")
 public class AuthenticationController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository repository;
+    private final TokenService tokenService;
 
     @Autowired
-    private UserRepository repository;
-
-    @Autowired
-    TokenService tokenService;
+    public AuthenticationController(AuthenticationManager authenticationManager, UserRepository repository, TokenService tokenService) {
+        this.authenticationManager = authenticationManager;
+        this.repository = repository;
+        this.tokenService = tokenService;
+    }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
@@ -50,7 +51,7 @@ public class AuthenticationController {
 
         var teacherFind = repository.findByUserTeacherCode(data.login());
 
-        if (studentFind == null){
+        if (studentFind == null) {
             userFind = teacherFind;
         } else {
             userFind = studentFind;
@@ -66,8 +67,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid UserRequestDTO data){
-        if(this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
+    public ResponseEntity<String> register(@RequestBody @Valid UserRequestDTO data) {
+        if (this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
 
         if (!validate(data.password())) {
             return ResponseEntity.badRequest().body("A senha deve conter pelo menos um caractere especial e seis caracteres alfanuméricos.");
@@ -80,7 +81,7 @@ public class AuthenticationController {
         newUser.setPassword(encryptedPassword);
 
         this.repository.save(newUser);
-        
+
         return ResponseEntity.ok().build();
     }
 

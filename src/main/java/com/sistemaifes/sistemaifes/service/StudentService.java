@@ -21,6 +21,7 @@ import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
 import com.sistemaifes.sistemaifes.repository.StudentRepository;
 import com.sistemaifes.sistemaifes.repository.StudentScheduleRepository;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -98,9 +99,12 @@ public class StudentService {
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public void delete(@PathVariable @NotNull Long id){
-        repository.delete(repository.findById(id)
-            .orElseThrow(() -> new RecordNotFoundException(id)));
+    @Transactional
+    public void deleteMultiple(List<@NotNull Long> ids) {
+        ids.forEach(id -> {
+            repository.delete(repository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException(id)));
+        });
     }
 
     public List<StudentSchedule> getStudentSchedule(String studentCode){

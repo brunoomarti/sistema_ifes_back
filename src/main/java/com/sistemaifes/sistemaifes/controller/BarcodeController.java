@@ -18,7 +18,6 @@ import javax.print.PrintServiceLookup;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.print.*;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;

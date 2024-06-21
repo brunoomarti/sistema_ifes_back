@@ -64,10 +64,10 @@ public class StudentController {
         return studentService.update(id, student);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete-multiple")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable @NotNull @Positive Long id){
-        studentService.delete(id);
+    public void deleteMultiple(@RequestBody List<@NotNull @Positive Long> ids){
+        studentService.deleteMultiple(ids);
     }
 
     @GetMapping("/schedule/{studentCode}")
