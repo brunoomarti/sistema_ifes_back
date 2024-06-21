@@ -41,7 +41,6 @@ public class Local {
     private Integer capacity;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.REMOVE) 
-    @JsonIgnore
     private List<EquipmentLocal> equipments;
 
     @OneToMany(mappedBy = "location") 

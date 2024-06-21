@@ -9,6 +9,7 @@ import com.sistemaifes.sistemaifes.exception.ItemAlreadyRegisteredException;
 import com.sistemaifes.sistemaifes.model.Allocation;
 import com.sistemaifes.sistemaifes.model.Lesson;
 import com.sistemaifes.sistemaifes.repository.AllocationRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,8 @@ import jakarta.validation.constraints.Positive;
 @Service
 public class LocalService {
     private final LocalRepository repository;
+
+    @Autowired
     private final EquipmentLocalRepository equipmentLocalRepository;
 
     @Autowired
@@ -83,32 +86,35 @@ public class LocalService {
     public boolean verifyIfEquipmentExist(String equipmentName) {
         return repository.existsByNameIgnoreCase(equipmentName);
     }
-    
-    public Local update(@NotNull @Positive Long id, @Valid Local local){
+
+    @Transactional
+    public Local update(@NotNull @Positive Long id, @Valid Local local) {
+        Local managedLocal = repository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
+
+        managedLocal.setName(local.getName());
+        managedLocal.setCapacity(local.getCapacity());
+
+        equipmentLocalRepository.deleteByLocation(managedLocal);
+
         List<EquipmentLocal> equipmentLocals = local.getEquipments();
         List<EquipmentLocal> newEquipList = new LinkedList<>();
-        EquipmentLocal savedEquipmentLocal = null;
 
-        if (equipmentLocals != null){
-            for (EquipmentLocal equipmentLocal : equipmentLocals) { 
-                savedEquipmentLocal = new EquipmentLocal();
-
+        if (equipmentLocals != null) {
+            for (EquipmentLocal equipmentLocal : equipmentLocals) {
+                EquipmentLocal savedEquipmentLocal = new EquipmentLocal();
                 savedEquipmentLocal.setQuantity(equipmentLocal.getQuantity());
                 savedEquipmentLocal.setEquipment(equipmentLocal.getEquipment());
-                savedEquipmentLocal.setLocation(local);
+                savedEquipmentLocal.setLocation(managedLocal);
 
-                equipmentLocalRepository.save(savedEquipmentLocal); 
+                equipmentLocalRepository.save(savedEquipmentLocal);
 
                 newEquipList.add(savedEquipmentLocal);
             }
         }
 
-        return repository.findById(id).map(recordFound -> {
-                    recordFound.setName(local.getName());
-                    recordFound.setCapacity(local.getCapacity());
-                    recordFound.setEquipments(newEquipList);
-                    return repository.save(recordFound);
-                }).orElseThrow(() -> new RecordNotFoundException(id));
+        managedLocal.setEquipments(newEquipList);
+
+        return repository.save(managedLocal);
     }
 
     public void delete(@PathVariable @NotNull Long id){
