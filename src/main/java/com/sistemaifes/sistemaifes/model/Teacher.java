@@ -47,6 +47,7 @@ public class Teacher extends User {
     
     public Teacher(TeacherRequestDTO data) { 
        this.setName(data.name());
+       this.setRole(data.role());
        this.teacherCode = data.teacherCode();
        this.educationLevel = data.educationLevel();
        this.situation = data.situation();

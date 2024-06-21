@@ -47,7 +47,7 @@ public class LessonService {
         return repository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public Lesson saveEvent(LessonRequestDTO data){
+    public Lesson saveLesson(LessonRequestDTO data){
         Lesson localData = new Lesson(data);
         return repository.save(localData);
     }

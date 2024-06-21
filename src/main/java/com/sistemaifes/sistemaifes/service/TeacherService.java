@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.sistemaifes.sistemaifes.controller.AuthenticationController;
+import com.sistemaifes.sistemaifes.dto.request.NextLessonTeacherRequest;
 import com.sistemaifes.sistemaifes.model.Lesson;
 import com.sistemaifes.sistemaifes.model.Student;
 import com.sistemaifes.sistemaifes.repository.LessonRepository;
@@ -108,5 +109,11 @@ public class TeacherService {
         List<Lesson> lessons = lessonRepository.findByTeacherId(studentId);
 
         return lessons.stream().collect(Collectors.toList());
+    }
+
+    public NextLessonTeacherRequest findNextLessonByTeacherCode(String teacherCode){
+        NextLessonTeacherRequest nextsLessons = repository.findNextLessonByTeacherCode(teacherCode);
+
+        return nextsLessons;
     }
 }

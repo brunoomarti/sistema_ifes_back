@@ -84,10 +84,10 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, "/api/schedule/**").hasAnyRole("ADMIN", "TEACHER", "STUDENT", "COORDINATOR")
 
                  // Api Allocation
-                .requestMatchers(HttpMethod.POST, "/api/allocation/**").hasAnyRole("ADMIN", "COORDINATOR", "TEACHER")
-                .requestMatchers(HttpMethod.PUT, "/api/allocation/**").hasAnyRole("ADMIN", "COORDINATOR", "TEACHER")
-                .requestMatchers(HttpMethod.DELETE, "/api/allocation/**").hasAnyRole("ADMIN", "COORDINATOR", "TEACHER")
-                .requestMatchers(HttpMethod.GET, "/api/allocation/**").hasAnyRole("ADMIN", "COORDINATOR", "TEACHER", "STUDENT")
+                .requestMatchers(HttpMethod.POST, "/api/allocate/**").hasAnyRole("ADMIN", "COORDINATOR", "TEACHER")
+                .requestMatchers(HttpMethod.PUT, "/api/allocate/**").hasAnyRole("ADMIN", "COORDINATOR", "TEACHER")
+                .requestMatchers(HttpMethod.DELETE, "/api/allocate/**").hasAnyRole("ADMIN", "COORDINATOR", "TEACHER")
+                .requestMatchers(HttpMethod.GET, "/api/allocate/**").hasAnyRole("ADMIN", "COORDINATOR", "TEACHER", "STUDENT")
 
                  // Api Classe
                 .requestMatchers(HttpMethod.POST, "/api/classe/**").hasAnyRole("ADMIN", "COORDINATOR")
@@ -111,7 +111,7 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/api/history/**").hasAnyRole("ADMIN", "COORDINATOR")
                 .requestMatchers(HttpMethod.PUT, "/api/history/**").hasAnyRole("ADMIN", "COORDINATOR")
                 .requestMatchers(HttpMethod.DELETE, "/api/history/**").hasAnyRole("ADMIN", "COORDINATOR")
-                .requestMatchers(HttpMethod.GET, "/api/history/**").hasAnyRole("ADMIN",  "COORDINATOR", "TEACHER", "STUDENT")
+                .requestMatchers(HttpMethod.GET, "/api/history/**").hasAnyRole("ADMIN", "COORDINATOR", "TEACHER", "STUDENT")
 
                 // Api Lesson
                 .requestMatchers(HttpMethod.POST, "/api/lesson/**").hasAnyRole("ADMIN", "COORDINATOR")

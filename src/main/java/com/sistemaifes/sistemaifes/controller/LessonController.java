@@ -31,8 +31,8 @@ public class LessonController {
     
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Lesson saveEvent(@RequestBody LessonRequestDTO data){ 
-        return lessonService.saveEvent(data);
+    public Lesson saveLesson(@RequestBody LessonRequestDTO data){
+        return lessonService.saveLesson(data);
     }
 
     @GetMapping("/{id}")

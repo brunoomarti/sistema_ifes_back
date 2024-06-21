@@ -33,6 +33,7 @@ public class Student extends User {
 
     public Student(StudentRequestDTO data) {
         this.setName(data.name());
+        this.setRole(data.role());
         this.studentCode = data.studentCode();
         this.registrationYear = data.registrationYear();
         this.course = data.course();

@@ -27,6 +27,7 @@ public class Coordinator extends User {
 
     public Coordinator(CoordinatorRequestDTO data) {
         this.setName(data.name());
+        this.setRole(data.role());
         this.coordination = data.coordination(); 
     }
 }
