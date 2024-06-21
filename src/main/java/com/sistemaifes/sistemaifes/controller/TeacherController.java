@@ -59,7 +59,7 @@ public class TeacherController {
     }
 
     @GetMapping("/schedule/{teacherCode}")
-    public NextLessonTeacherRequest findNextLessonByTeacherCode(@PathVariable @NotNull @Positive String teacherCode) {
+    public Object findNextLessonByTeacherCode(@PathVariable @NotNull @Positive String teacherCode) {
         return teacherService.findNextLessonByTeacherCode(teacherCode);
     }
 

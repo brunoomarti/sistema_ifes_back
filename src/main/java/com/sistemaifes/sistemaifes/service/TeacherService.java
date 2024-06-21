@@ -111,8 +111,8 @@ public class TeacherService {
         return lessons.stream().collect(Collectors.toList());
     }
 
-    public NextLessonTeacherRequest findNextLessonByTeacherCode(String teacherCode){
-        NextLessonTeacherRequest nextsLessons = repository.findNextLessonByTeacherCode(teacherCode);
+    public Object findNextLessonByTeacherCode(String teacherCode){
+        Object nextsLessons = repository.findNextLessonByTeacherCode(teacherCode);
 
         return nextsLessons;
     }
