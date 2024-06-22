@@ -106,7 +106,7 @@ public class MicroterminalService {
     }
 
     private String getAulaInfo(String studentId) throws IOException {
-        String apiUrl = "http://localhost:8080/api/lesson/getNextLesson/" + studentId;
+        String apiUrl = "http://localhost:8080/api/lesson/s/getNextLesson/" + studentId;
         URL url = new URL(apiUrl);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");

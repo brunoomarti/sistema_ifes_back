@@ -2,7 +2,8 @@ package com.sistemaifes.sistemaifes.controller;
 
 import java.util.List;
 
-import com.sistemaifes.sistemaifes.dto.request.NextLessonTeacherRequest;
+import com.sistemaifes.sistemaifes.dto.request.NextLessonTeacherRequestDTO;
+import com.sistemaifes.sistemaifes.model.NextLessonTeacher;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,12 +58,6 @@ public class TeacherController {
     public Teacher update(@PathVariable @NotNull @Positive Long id, @RequestBody Teacher teacher){
         return teacherService.update(id, teacher);
     }
-
-    @GetMapping("/schedule/{teacherCode}")
-    public Object findNextLessonByTeacherCode(@PathVariable @NotNull @Positive String teacherCode) {
-        return teacherService.findNextLessonByTeacherCode(teacherCode);
-    }
-
 
     @GetMapping("/{id}/records")
     public List<Object> getRecordsStudent(@PathVariable @NotNull @Positive Long id) {

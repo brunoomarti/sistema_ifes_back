@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import com.sistemaifes.sistemaifes.dto.response.StudentLessonScheduleResponseDTO;
 import com.sistemaifes.sistemaifes.model.*;
+import com.sistemaifes.sistemaifes.repository.NextTeacherLessonRepository;
 import com.sistemaifes.sistemaifes.repository.StudentLessonScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class LessonService {
     private final StudentLessonScheduleRepository studentLessonShedule;
 
     @Autowired
-    private LessonRepository lessonRepository;
+    private  NextTeacherLessonRepository nextTeacherLessonRepository;
 
     public LessonService(LessonRepository repository,
                          StudentRepository studentRepository,
@@ -93,6 +94,10 @@ public class LessonService {
 
     public StudentLessonSchedule findNextLessonByStudentCode(String studentCode) {
         return studentLessonShedule.findNextLessonByStudentCode(studentCode);
+    }
+
+    public NextLessonTeacher findNextLessonByTeacherCode(String teacherCode){
+        return nextTeacherLessonRepository.findNextLessonByTeacherCode(teacherCode);
     }
 
     public List<LessonResponseDTO> findLessonsByTeacherCodeAndSemesterId(String teacherCode, Long semesterId) {

@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.sistemaifes.sistemaifes.controller.AuthenticationController;
-import com.sistemaifes.sistemaifes.dto.request.NextLessonTeacherRequest;
+import com.sistemaifes.sistemaifes.dto.request.NextLessonTeacherRequestDTO;
 import com.sistemaifes.sistemaifes.model.Lesson;
-import com.sistemaifes.sistemaifes.model.Student;
+import com.sistemaifes.sistemaifes.model.NextLessonTeacher;
 import com.sistemaifes.sistemaifes.repository.LessonRepository;
+import com.sistemaifes.sistemaifes.repository.NextTeacherLessonRepository;
 import com.sistemaifes.sistemaifes.repository.UserRepository;
 import com.sistemaifes.sistemaifes.util.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class TeacherService {
 
     @Autowired
     private AuthenticationController authenticationController;
+
+    @Autowired
+    private NextTeacherLessonRepository nextTeacherLessonRepository;
 
     public TeacherService(TeacherRepository repository){
         this.repository = repository;
@@ -109,11 +113,5 @@ public class TeacherService {
         List<Lesson> lessons = lessonRepository.findByTeacherId(studentId);
 
         return lessons.stream().collect(Collectors.toList());
-    }
-
-    public Object findNextLessonByTeacherCode(String teacherCode){
-        Object nextsLessons = repository.findNextLessonByTeacherCode(teacherCode);
-
-        return nextsLessons;
     }
 }
