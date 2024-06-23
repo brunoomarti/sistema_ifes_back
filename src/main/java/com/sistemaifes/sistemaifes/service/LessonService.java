@@ -18,6 +18,7 @@ import com.sistemaifes.sistemaifes.exception.RecordNotFoundException;
 import com.sistemaifes.sistemaifes.repository.LessonRepository;
 import com.sistemaifes.sistemaifes.repository.StudentRepository;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -72,15 +73,22 @@ public class LessonService {
             .orElseThrow(() -> new RecordNotFoundException(id)));
     }
 
-    public void removeStudentFromLesson(Long studentId, Long lessonId) {
-        Student student =  studentRepository.findById(studentId)
-                                    .orElseThrow(() -> new RecordNotFoundException(studentId));
+    @Transactional
+    public void deleteMultiple(List<Long> ids) {
+        ids.forEach(this::delete);
+    }
 
+    @Transactional
+    public void removeStudentFromLesson(List<Long> studentIds, Long lessonId) {
         Lesson lesson = repository.findById(lessonId)
-                        .orElseThrow(() -> new RecordNotFoundException(lessonId));                         
-        
-        repository.removeStudentFromLesson(studentId, lessonId);
-        
+                .orElseThrow(() -> new RecordNotFoundException(lessonId));
+
+        for (Long studentId : studentIds) {
+            Student student = studentRepository.findById(studentId)
+                    .orElseThrow(() -> new RecordNotFoundException(studentId));
+
+            repository.removeStudentFromLesson(studentId, lessonId);
+        }
     }
 
     public void removeAllStudentFromLesson(Long lessonId){

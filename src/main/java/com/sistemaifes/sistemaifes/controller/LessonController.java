@@ -46,16 +46,16 @@ public class LessonController {
         return lessonService.update(id, lesson);
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/delete-multiple")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable @NotNull @Positive Long id){
-        lessonService.delete(id);
+    public void deleteMultiple(@RequestBody List<@NotNull @Positive Long> ids) {
+        lessonService.deleteMultiple(ids);
     }
 
-    @DeleteMapping("/removeStudent/{studentId}/{lessonId}")
+    @DeleteMapping("/removeStudents/{lessonId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void removeStudentFromLesson(@PathVariable @NotNull @Positive Long studentId, @PathVariable @NotNull @Positive Long lessonId){
-        lessonService.removeStudentFromLesson(studentId, lessonId);
+    public void removeStudentFromLesson(@PathVariable @NotNull @Positive Long lessonId, @RequestBody List<@NotNull @Positive Long> studentIds) {
+        lessonService.removeStudentFromLesson(studentIds, lessonId);
     }
 
     @GetMapping("/getLessons/{studentCode}/{semesterId}")

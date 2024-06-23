@@ -10,6 +10,7 @@ public interface StudentLessonScheduleRepository extends JpaRepository<StudentLe
          SELECT
              ui.name AS student_name,
              d.acronym AS discipline_name,
+             d.name AS completeDiscipline_name,
              loc.name AS local_name,
              TO_TIMESTAMP(CONCAT(CURRENT_DATE, ' ', s.start_time), 'YYYY-MM-DD HH24:MI') AS start_time_ts,
              0 AS id_studentlessonschedule
