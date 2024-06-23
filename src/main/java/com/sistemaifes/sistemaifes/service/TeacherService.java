@@ -65,7 +65,12 @@ public class TeacherService {
 
         dataTeacher.setLogin(data.teacherCode());
         dataTeacher.setPassword("123456!");
-        dataTeacher.setRole(UserRole.TEACHER);
+
+        if (dataTeacher.isCoordinator()){
+            dataTeacher.setRole(UserRole.COORDINATOR);
+        } else {
+            dataTeacher.setRole(UserRole.TEACHER);
+        }
 
         registerTeacher(dataTeacher);
 
@@ -95,9 +100,13 @@ public class TeacherService {
                 .map(recordFound -> {
                     recordFound.setName(teacher.getName());
                     recordFound.setTeacherCode(teacher.getTeacherCode());
-                    recordFound.setCoordinator(teacher.isCoordinator());
                     recordFound.setEducationLevel(teacher.getEducationLevel());
                     recordFound.setSituation(teacher.isSituation());
+                    if (teacher.isCoordinator()){
+                        recordFound.setRole(UserRole.COORDINATOR);
+                    } else {
+                        recordFound.setRole(UserRole.TEACHER);
+                    }
                     recordFound.setCoordinator(teacher.isCoordinator());
                     recordFound.setCoordination(teacher.getCoordination());
                     return repository.save(recordFound);
