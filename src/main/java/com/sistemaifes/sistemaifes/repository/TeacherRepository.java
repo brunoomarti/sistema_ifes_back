@@ -2,8 +2,6 @@ package com.sistemaifes.sistemaifes.repository;
 
 import java.util.List;
 
-import com.sistemaifes.sistemaifes.dto.request.NextLessonTeacherRequestDTO;
-import com.sistemaifes.sistemaifes.model.NextLessonTeacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

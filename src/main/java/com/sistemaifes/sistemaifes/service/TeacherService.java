@@ -12,6 +12,8 @@ import com.sistemaifes.sistemaifes.repository.NextTeacherLessonRepository;
 import com.sistemaifes.sistemaifes.repository.UserRepository;
 import com.sistemaifes.sistemaifes.util.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -122,5 +124,9 @@ public class TeacherService {
         List<Lesson> lessons = lessonRepository.findByTeacherId(studentId);
 
         return lessons.stream().collect(Collectors.toList());
+    }
+
+    public Page<Teacher> listarPaginado(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }

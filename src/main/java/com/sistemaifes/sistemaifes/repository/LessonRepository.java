@@ -1,7 +1,5 @@
 package com.sistemaifes.sistemaifes.repository;
 
-import com.sistemaifes.sistemaifes.model.Allocation;
-import com.sistemaifes.sistemaifes.model.Discipline;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
