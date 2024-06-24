@@ -26,13 +26,17 @@ public class StudentLessonSchedule {
 
     private String studentName;
     private String disciplineName;
+    private String teacherName;
     private String localName;
+    private String completeDisciplineName;
     private ZonedDateTime startTimeTs;
 
     public StudentLessonSchedule(StudentLessonScheduleRequestDTO data){
         this.studentName = data.studentName();
         this.disciplineName = data.disciplineName();
+        this.teacherName = data.teacherName();
         this.localName = data.localName();
+        this.completeDisciplineName = data.completeDisciplineName();
         this.startTimeTs = data.startTimeTs();
     }
 }

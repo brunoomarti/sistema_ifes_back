@@ -10,7 +10,8 @@ public interface StudentLessonScheduleRepository extends JpaRepository<StudentLe
          SELECT
              ui.name AS student_name,
              d.acronym AS discipline_name,
-             d.name AS completeDiscipline_name,
+             d.name AS complete_discipline_name,
+             uii.name AS teacher_name,
              loc.name AS local_name,
              TO_TIMESTAMP(CONCAT(CURRENT_DATE, ' ', s.start_time), 'YYYY-MM-DD HH24:MI') AS start_time_ts,
              0 AS id_studentlessonschedule
@@ -22,6 +23,10 @@ public interface StudentLessonScheduleRepository extends JpaRepository<StudentLe
              Lesson_Student sl ON st._id = sl.id_student
           JOIN
              Lesson l ON sl.id_lesson = l._id
+         JOIN
+            Teacher t ON l.id_teacher = t._id
+		 JOIN
+            User_Ifes uii ON t._id = uii._id
           JOIN
              Allocation a ON a.id_lesson = l._id
           JOIN
@@ -33,7 +38,7 @@ public interface StudentLessonScheduleRepository extends JpaRepository<StudentLe
           JOIN
              Schedule s ON als.schedule_id = s._id
           WHERE
-             st.student_code = :studentCode
+             st.student_code = '2020122737227'
              AND TO_TIMESTAMP(CONCAT(CURRENT_DATE, ' ', s.start_time), 'YYYY-MM-DD HH24:MI') > NOW()
           AND CASE 
                  WHEN EXTRACT(DOW FROM CURRENT_DATE) = 1 THEN 'Segunda-feira'
@@ -51,6 +56,8 @@ public interface StudentLessonScheduleRepository extends JpaRepository<StudentLe
          SELECT
               nl.student_name,
               nl.discipline_name,
+              nl.complete_discipline_name,
+              nl.teacher_name,
               nl.local_name,
               nl.start_time_ts,
               nl.id_studentlessonschedule
