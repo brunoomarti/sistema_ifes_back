@@ -25,7 +25,7 @@ public class Event {
     private Long _id;
 
     @Column(length = 100)
-    @Length(min = 3, max = 10)
+    @Length(min = 3)
     private String name;
 
     @Column(length = 100)

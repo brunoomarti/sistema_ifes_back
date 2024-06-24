@@ -1,18 +1,12 @@
 package com.sistemaifes.sistemaifes.model;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistemaifes.sistemaifes.dto.request.HistoryRequestDTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn; 
-import jakarta.persistence.ManyToOne; 
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -76,8 +70,13 @@ public class History {
     @JoinColumn(name = "id_classe")
     private Classe classe;
 
-    @Column
-    private String selectedTimes;
+    @ManyToMany
+    @JoinTable(
+            name = "history_schedule",
+            joinColumns = @JoinColumn(name = "allocation_id"),
+            inverseJoinColumns = @JoinColumn(name = "schedule_id")
+    )
+    private List<Schedule> selectedTimes;
     
     @ManyToOne
     @JoinColumn(name = "id_allocation", nullable = false)

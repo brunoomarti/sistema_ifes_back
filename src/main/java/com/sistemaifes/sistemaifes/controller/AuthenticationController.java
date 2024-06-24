@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -81,6 +82,26 @@ public class AuthenticationController {
         newUser.setPassword(encryptedPassword);
 
         this.repository.save(newUser);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/resetPassword")
+    public ResponseEntity<String> resetPassword(@RequestBody @Valid AuthenticationDTO data) {
+        User user =  this.repository.findByAllUserWithLogin(data.login());
+
+        if (user == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (!validate(data.password())) {
+            return ResponseEntity.badRequest().body("A senha deve conter pelo menos um caractere especial e seis caracteres alfanuméricos.");
+        }
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+        user.setPassword(encryptedPassword);
+
+        this.repository.save(user);
 
         return ResponseEntity.ok().build();
     }

@@ -125,7 +125,29 @@ public class MicroterminalService {
         } else {
             return "ERROR";
         }
-    }    
+    }
+
+    private String getAulaProfessorInfo(String teacherId) throws IOException {
+        String apiUrl = "http://localhost:8080/api/lesson/t/getNextLesson/" + teacherId;
+        URL url = new URL(apiUrl);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+
+        int responseCode = conn.getResponseCode();
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            Scanner scanner = new Scanner(conn.getInputStream());
+            StringBuilder response = new StringBuilder();
+            while (scanner.hasNextLine()) {
+                response.append(scanner.nextLine());
+            }
+            scanner.close();
+            return response.toString();
+        } else if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+            return "NOT_FOUND";
+        } else {
+            return "ERROR";
+        }
+    }
 
     private void displayAulaInfo(String response, DataOutputStream dos, String studentId) {
         try {

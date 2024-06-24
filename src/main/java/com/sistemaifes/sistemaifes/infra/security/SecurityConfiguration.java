@@ -32,6 +32,7 @@ public class SecurityConfiguration {
 
                 .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/auth/resetPassword").hasAnyRole("ADMIN", "COORDINATOR", "TEACHER", "STUDENT")
 
                 .requestMatchers(HttpMethod.POST, "/api/print-barcode").permitAll()
 

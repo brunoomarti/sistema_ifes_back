@@ -1,13 +1,9 @@
 package com.sistemaifes.sistemaifes.dto.response;
  
-import java.util.Date; 
+import java.util.Date;
+import java.util.List;
 
-import com.sistemaifes.sistemaifes.model.Allocation;
-import com.sistemaifes.sistemaifes.model.Classe;
-import com.sistemaifes.sistemaifes.model.Event;
-import com.sistemaifes.sistemaifes.model.History;
-import com.sistemaifes.sistemaifes.model.Lesson;
-import com.sistemaifes.sistemaifes.model.Local; 
+import com.sistemaifes.sistemaifes.model.*;
 
 public record HistoryResponseDTO(
     Long _id,
@@ -26,7 +22,7 @@ public record HistoryResponseDTO(
     Local location,
     Classe classe,
     Allocation allocation,
-    String selectedTimes
+    List<Schedule> selectedTimes
 ) {
     public HistoryResponseDTO(History history){
         this(
